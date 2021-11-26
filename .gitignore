@@ -1,0 +1,15 @@
+# Objects and executables
+*.o
+a.out
+UnitTests
+
+# misc files that can clutter the directory
+compile_commands.json
+.vimspector.json
+tags
+.ccls-cache
+.cache
+
+# if using cmake:
+build
+.build
