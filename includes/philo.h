@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/28 16:03:31 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/28 16:35:02 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef enum e_error
 {
 	success = 0,
 	error,
+	error_av,
 	error_malloc
 }	t_error;
 
@@ -76,6 +77,6 @@ typedef struct s_all
 ** =============================== Functions ================================ **
 */
 
-void	f_parse_av(t_all *all, int ac, char **av);
+void	f_parse_av(t_all *all, int ac, const char **av);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:58:20 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/28 16:02:28 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/28 16:35:02 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	f_parse_av(t_all *all, int ac, char **av)
+void	f_parse_av(t_all *all, int ac, const char **av)
 {
 	(void)all;
 	(void)ac;

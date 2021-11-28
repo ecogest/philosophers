@@ -6,13 +6,13 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:19:00 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/28 15:58:00 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/28 16:35:02 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int ac, char **av)
+int	main(int ac, const char **av)
 {
 	t_all	all;
 
