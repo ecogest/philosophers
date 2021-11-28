@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/28 15:50:29 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/28 16:00:27 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@
 # include "libft.h" // TODO: Remove libft
 # include <stdio.h>
 # include <pthread.h>
+
+typedef enum e_error
+{
+	success = 0,
+	error,
+	error_malloc
+}	t_error;
 
 typedef struct s_philo_param
 {
@@ -50,6 +57,7 @@ typedef struct s_all
 	t_philo_param	philo_param;
 	pthread_mutex_t	mu_stdout;
 	t_philos		philos;
+	t_error			error;
 }					t_all;
 
 #endif
