@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   f_parse_av.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/15 16:19:00 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/28 15:58:00 by mjacq            ###   ########.fr       */
+/*   Created: 2021/11/28 15:58:20 by mjacq             #+#    #+#             */
+/*   Updated: 2021/11/28 16:02:28 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int ac, char **av)
+void	f_parse_av(t_all *all, int ac, char **av)
 {
-	t_all	all;
-
-	f_parse_av(&all, ac, av);
-	return (0);
+	(void)all;
+	(void)ac;
+	(void)av;
 }

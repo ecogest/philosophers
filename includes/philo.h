@@ -6,16 +6,24 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/28 16:00:27 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/28 16:03:31 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
+/*
+** ================================ Includes ================================ **
+*/
+
 # include "libft.h" // TODO: Remove libft
 # include <stdio.h>
 # include <pthread.h>
+
+/*
+** ================================= Enums ================================== **
+*/
 
 typedef enum e_error
 {
@@ -23,6 +31,10 @@ typedef enum e_error
 	error,
 	error_malloc
 }	t_error;
+
+/*
+** =============================== Structures =============================== **
+*/
 
 typedef struct s_philo_param
 {
@@ -59,5 +71,11 @@ typedef struct s_all
 	t_philos		philos;
 	t_error			error;
 }					t_all;
+
+/*
+** =============================== Functions ================================ **
+*/
+
+void	f_parse_av(t_all *all, int ac, char **av);
 
 #endif
