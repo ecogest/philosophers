@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/28 16:35:02 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/28 17:57:47 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 */
 
 # include "libft.h" // TODO: Remove libft
+# include <stdbool.h>
 # include <stdio.h>
 # include <pthread.h>
 
@@ -39,11 +40,11 @@ typedef enum e_error
 
 typedef struct s_philo_param
 {
-	size_t	tt_die;
-	size_t	tt_eat;
-	size_t	tt_sleep;
-	size_t	max_meal;
-}			t_philo_param;
+	int	tt_die;
+	int	tt_eat;
+	int	tt_sleep;
+	int	max_meal;
+}		t_philo_param;
 
 typedef struct s_forks
 {
@@ -61,7 +62,7 @@ typedef struct s_philo
 
 typedef struct s_philos
 {
-	size_t	philo_count;
+	int	philo_count;
 	t_philo	*array;
 }			t_philos;
 
@@ -78,5 +79,7 @@ typedef struct s_all
 */
 
 void	f_parse_av(t_all *all, int ac, const char **av);
+
+void	f_puterr(const char *s);
 
 #endif
