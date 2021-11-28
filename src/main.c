@@ -6,16 +6,15 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:19:00 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/26 13:08:01 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/28 15:50:50 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hello_world.h"
-#include "libft.h"
+#include "philo.h"
 
-int	main(void)
+int	main(int ac, char **av)
 {
-	hello_world();
-	ft_putstr("Libft is linked.\n");
+	(void)ac;
+	(void)av;
 	return (0);
 }
