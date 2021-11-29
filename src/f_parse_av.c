@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:58:20 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 11:58:53 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/29 12:07:03 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,20 @@ static bool	philo_count_strictly_positive(const char *philo_count)
 	return (ft_atoi(philo_count) > 0);
 }
 
-static t_error	args_check_error(int ac, const char **av, const char **err)
+static void
+	err_check_av(t_error *err, const char **strerr, int ac, const char **av)
 {
-	*err = NULL;
+	*strerr = NULL;
+	*err = success;
 	if (!has_enough_args(ac))
-		*err = "Wrong number of arguments.";
+		*strerr = "Wrong number of arguments.";
 	else if (!all_args_positive_integers(av))
-		*err = "Arguments should be positive integers.";
+		*strerr = "Arguments should be positive integers.";
 	else if (!philo_count_strictly_positive(av[1]))
-		*err = "The number of philosophers should be strictly positive.";
+		*strerr = "The number of philosophers should be strictly positive.";
 	else
-		return (success);
-	return (error_av);
+		return ;
+	*err = error_av;
 }
 
 /*
@@ -62,10 +64,10 @@ static t_error	args_check_error(int ac, const char **av, const char **err)
 
 void	f_parse_av(t_all *all, int ac, const char **av)
 {
-	const char	*err_msg;
+	const char	*strerr;
 
 	*all = (t_all){.philo_param.max_meal = -1};
-	all->error = args_check_error(ac, av, &err_msg);
+	err_check_av(&all->error, &strerr, ac, av);
 	if (!all->error)
 	{
 		all->philos.philo_count = ft_atoi(av[1]);
@@ -81,7 +83,7 @@ void	f_parse_av(t_all *all, int ac, const char **av)
 	}
 	else
 	{
-		f_puterr(err_msg);
+		f_puterr(strerr);
 		f_usage();
 	}
 }
