@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 12:11:24 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/29 12:26:22 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct s_all
 ** =============================== Functions ================================ **
 */
 
+int		main_philo(int ac, const char **av);
 void	f_parse_av(t_all *all, int ac, const char **av);
 
 void	f_puterr(const char *s);
