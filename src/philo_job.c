@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 18:09:51 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 19:42:11 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/29 19:48:39 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	philo_print_action(t_philo *philo)
 	i = 0;
 	while (philo->state.action != actions[i].action)
 		i++;
-
 	pthread_mutex_lock(philo->mu_stdout);
 	printf("\e[38m%u\e[0m \e[1m%ld\e[0m %s%s\e[0m\n", philo->state.timestamp, \
 			philo->tid, actions[i].color, actions[i].stract);
