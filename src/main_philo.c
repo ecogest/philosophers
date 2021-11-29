@@ -6,22 +6,11 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 12:24:29 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 14:55:01 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/29 18:24:38 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void	*philo_job(void *phil)
-{
-	t_philo	*philo;
-
-	philo = phil;
-	pthread_mutex_lock(philo->mu_stdout);
-	printf("tid: %ld\n", philo->tid);
-	pthread_mutex_unlock(philo->mu_stdout);
-	return (NULL);
-}
 
 // TODO:
 void	philos_lock_start(t_philos *philos)
@@ -64,6 +53,7 @@ int	main_philo(int ac, const char **av)
 	{
 		philos_init(&root.philos, &root);
 		philos_lock_start(&root.philos);
+		gettimeofday(&root.philo_param.tv_start, NULL);
 		philos_create_threads(&root.philos);
 		philos_run_threads(&root.philos);
 		if (root.philos.error)
