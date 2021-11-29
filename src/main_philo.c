@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 12:24:29 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 14:08:28 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/29 14:12:41 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,22 @@
 // TODO:
 void	philos_lock_start(t_philos *philos)
 {
-	(void)philos;
+	if (philos->error)
+		return ;
 }
 
 // TODO:
 void	philos_create_threads(t_philos *philos)
 {
-	(void)philos;
+	if (philos->error)
+		return ;
 }
 
 // TODO:
 void	philos_run_threads(t_philos *philos)
 {
-	(void)philos;
+	if (philos->error)
+		return ;
 }
 
 /*
