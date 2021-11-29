@@ -1,6 +1,6 @@
 # Objects and executables
 *.o
-a.out
+philo
 UnitTests
 
 # misc files that can clutter the directory
