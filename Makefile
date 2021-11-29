@@ -100,7 +100,7 @@ googletest/build:
 RUN_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
 RUN_ARGS := $(if $(RUN_ARGS),$(RUN_ARGS),*)
 test: compile-test
-	./$(NAME_TEST) --gtest_color=yes --gtest_filter="$(RUN_ARGS)" # --gtest_brief=1 to run quietly
+	#./$(NAME_TEST) --gtest_color=yes --gtest_filter="$(RUN_ARGS)" # --gtest_brief=1 to run quietly
 
 #  ================================= .PHONY =================================  #
 

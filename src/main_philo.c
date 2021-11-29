@@ -6,22 +6,25 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 12:24:29 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 13:27:32 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/29 13:29:28 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+// TODO:
 void	philos_lock_start(t_philos *philos)
 {
 	(void)philos;
 }
 
+// TODO:
 void	philos_create_threads(t_philos *philos)
 {
 	(void)philos;
 }
 
+// TODO:
 void	philos_run_threads(t_philos *philos)
 {
 	(void)philos;
