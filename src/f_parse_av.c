@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:58:20 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/28 18:09:08 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/29 11:47:52 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,31 @@ static bool	has_enough_args(int ac)
 	return (ac == 5 || ac == 6);
 }
 
-static bool	all_args_positive_numbers(const char **av)
+static bool	all_args_positive_integers(const char **av)
 {
-	(void)av;
+	int	i;
+
+	i = 1;
+	while (av[i])
+	{
+		if (!ft_isint(av[i]) || ft_atoi(av[i]) < 0)
+			return (false);
+		i++;
+	}
 	return (true);
 }
 
 static bool	philo_count_strictly_positive(const char *philo_count)
 {
-	(void)philo_count;
-	return (true);
+	return (ft_atoi(philo_count) > 0);
 }
 
 static t_error	perform_checks_on_args(int ac, const char **av)
 {
 	if (!has_enough_args(ac))
 		f_puterr("Wrong number of arguments.");
-	else if (!all_args_positive_numbers(av))
-		f_puterr("Arguments should be positive numbers (below INT_MAX).");
+	else if (!all_args_positive_integers(av))
+		f_puterr("Arguments should be positive integers.");
 	else if (!philo_count_strictly_positive(av[1]))
 		f_puterr("The number of philosophers should be strictly positive.");
 	else
@@ -69,4 +76,6 @@ void	f_parse_av(t_all *all, int ac, const char **av)
 				all->philo_param.tt_die, all->philo_param.tt_eat,
 				all->philo_param.tt_sleep, all->philo_param.max_meal);
 	}
+	else
+		f_usage();
 }
