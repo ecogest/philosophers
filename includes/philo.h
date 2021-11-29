@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 13:50:15 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/29 13:53:56 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,27 +67,27 @@ typedef struct s_philos
 	t_error	error;
 }			t_philos;
 
-typedef struct s_all
+typedef struct s_root
 {
 	t_philo_param	philo_param;
 	pthread_mutex_t	mu_stdout;
 	t_philos		philos;
 	t_error			error;
-}					t_all;
+}					t_root;
 
 /*
 ** =============================== Functions ================================ **
 */
 
 int		main_philo(int ac, const char **av);
-void	f_parse_av(t_all *all, int ac, const char **av);
-void	philos_init(t_philos *philos, t_all *all);
+void	root_parse_av(t_root *all, int ac, const char **av);
+void	philos_init(t_philos *philos, t_root *all);
 
 void	*f_calloc(size_t block_size, size_t count, t_error *error);
 void	f_puterr(const char *s);
 void	f_put_usage(void);
 
-void	all_cleanup(t_all *all);
+void	root_cleanup(t_root *all);
 void	philos_cleanup(t_philos *philos);
 
 #endif

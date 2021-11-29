@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 12:24:29 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 13:50:15 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/29 13:53:56 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,27 +30,27 @@ void	philos_run_threads(t_philos *philos)
 	(void)philos;
 }
 
-void	all_init(t_all *all)
+void	root_init(t_root *root)
 {
-	*all = (t_all){.philo_param.max_meal = -1};
-	pthread_mutex_init(&all->mu_stdout, NULL);
+	*root = (t_root){.philo_param.max_meal = -1};
+	pthread_mutex_init(&root->mu_stdout, NULL);
 }
 
 int	main_philo(int ac, const char **av)
 {
-	t_all	all;
+	t_root	root;
 
-	all_init(&all);
-	f_parse_av(&all, ac, av);
-	if (!all.error)
+	root_init(&root);
+	root_parse_av(&root, ac, av);
+	if (!root.error)
 	{
-		philos_init(&all.philos, &all);
-		philos_lock_start(&all.philos);
-		philos_create_threads(&all.philos);
-		philos_run_threads(&all.philos);
-		if (all.philos.error)
-			all.error = all.philos.error;
+		philos_init(&root.philos, &root);
+		philos_lock_start(&root.philos);
+		philos_create_threads(&root.philos);
+		philos_run_threads(&root.philos);
+		if (root.philos.error)
+			root.error = root.philos.error;
 	}
-	all_cleanup(&all);
-	return (all.error);
+	root_cleanup(&root);
+	return (root.error);
 }
