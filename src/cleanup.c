@@ -23,9 +23,9 @@ void	philos_cleanup(t_philos *philos)
 	int		i;
 	t_philo	*philo;
 
-	i = 0;
 	if (philos->array)
 	{
+		i = 0;
 		while (i < philos->count)
 		{
 			philo = &philos->array[i];
