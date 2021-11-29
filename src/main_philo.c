@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 12:24:29 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 14:12:41 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/29 14:30:58 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,6 @@ void	philos_run_threads(t_philos *philos)
 {
 	if (philos->error)
 		return ;
-}
-
-/*
-** @brief default params (max_meal = -1) + stdout mutex init
-*/
-
-void	root_init(t_root *root)
-{
-	*root = (t_root){.philo_param.max_meal = -1};
-	f_mutex_init(&root->mu_stdout, &root->error);
 }
 
 int	main_philo(int ac, const char **av)
