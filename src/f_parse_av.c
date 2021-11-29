@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:58:20 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 11:47:52 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/29 11:58:53 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,15 @@ static bool	philo_count_strictly_positive(const char *philo_count)
 	return (ft_atoi(philo_count) > 0);
 }
 
-static t_error	perform_checks_on_args(int ac, const char **av)
+static t_error	args_check_error(int ac, const char **av, const char **err)
 {
+	*err = NULL;
 	if (!has_enough_args(ac))
-		f_puterr("Wrong number of arguments.");
+		*err = "Wrong number of arguments.";
 	else if (!all_args_positive_integers(av))
-		f_puterr("Arguments should be positive integers.");
+		*err = "Arguments should be positive integers.";
 	else if (!philo_count_strictly_positive(av[1]))
-		f_puterr("The number of philosophers should be strictly positive.");
+		*err = "The number of philosophers should be strictly positive.";
 	else
 		return (success);
 	return (error_av);
@@ -61,8 +62,10 @@ static t_error	perform_checks_on_args(int ac, const char **av)
 
 void	f_parse_av(t_all *all, int ac, const char **av)
 {
+	const char	*err_msg;
+
 	*all = (t_all){.philo_param.max_meal = -1};
-	all->error = perform_checks_on_args(ac, av);
+	all->error = args_check_error(ac, av, &err_msg);
 	if (!all->error)
 	{
 		all->philos.philo_count = ft_atoi(av[1]);
@@ -71,11 +74,14 @@ void	f_parse_av(t_all *all, int ac, const char **av)
 		all->philo_param.tt_sleep = ft_atoi(av[4]);
 		if (ac == 6)
 			all->philo_param.max_meal = ft_atoi(av[5]);
-		printf("philos: %d\nttd: %d\ntte: %d\ntts:%d\nmax meals: %d\n",
-				all->philos.philo_count,
-				all->philo_param.tt_die, all->philo_param.tt_eat,
+		printf("philos: %d\nttd: %d\ntte: %d\ntts:%d\nmax meals: %d\n", \
+				all->philos.philo_count, \
+				all->philo_param.tt_die, all->philo_param.tt_eat, \
 				all->philo_param.tt_sleep, all->philo_param.max_meal);
 	}
 	else
+	{
+		f_puterr(err_msg);
 		f_usage();
+	}
 }
