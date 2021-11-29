@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 13:43:07 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/29 13:50:15 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	*f_calloc(size_t block_size, size_t count, t_error *error);
 void	f_puterr(const char *s);
 void	f_put_usage(void);
 
-void	cleanup(t_all *all);
+void	all_cleanup(t_all *all);
 void	philos_cleanup(t_philos *philos);
 
 #endif
