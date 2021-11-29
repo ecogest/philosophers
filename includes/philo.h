@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 12:09:02 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/29 12:11:24 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct s_philo
 
 typedef struct s_philos
 {
-	int	philo_count;
+	int		philo_count;
 	t_philo	*array;
 }			t_philos;
 
