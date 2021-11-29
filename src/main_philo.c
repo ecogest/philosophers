@@ -6,41 +6,25 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 12:24:29 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 13:14:39 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/29 13:27:32 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	philo_fill_params(t_philo *philo, t_all *all)
+void	philos_lock_start(t_philos *philos)
 {
-	*philo = (t_philo){\
-		.param = &all->philo_param, \
-		.mu_stdout = &all->mu_stdout \
-	};
+	(void)philos;
 }
 
-/*
-** @brief Alloc the array of philos, and pass each of them their params
-*/
-
-void	philos_init(t_philos *philos, t_all *all)
+void	philos_create_threads(t_philos *philos)
 {
-	int		i;
-	t_philo	*philo;
+	(void)philos;
+}
 
-	philos->array = f_calloc(philos->count, sizeof(*philos->array), \
-			&philos->error);
-	if (!philos->error)
-	{
-		i = 0;
-		while (i < philos->count)
-		{
-			philo = &philos->array[i];
-			philo_fill_params(philo, all);
-			i++;
-		}
-	}
+void	philos_run_threads(t_philos *philos)
+{
+	(void)philos;
 }
 
 int	main_philo(int ac, const char **av)
@@ -51,12 +35,11 @@ int	main_philo(int ac, const char **av)
 	if (!all.error)
 	{
 		philos_init(&all.philos, &all);
-		if (!all.philos.error)
-		{
-
-		}
-		else
-			all.error =  all.philos.error;
+		philos_lock_start(&all.philos);
+		philos_create_threads(&all.philos);
+		philos_run_threads(&all.philos);
+		if (all.philos.error)
+			all.error = all.philos.error;
 	}
 	return (all.error);
 }
