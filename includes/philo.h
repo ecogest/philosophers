@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 12:26:22 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/29 13:26:02 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ typedef struct s_philo
 
 typedef struct s_philos
 {
-	int		philo_count;
+	int		count;
 	t_philo	*array;
+	t_error	error;
 }			t_philos;
 
 typedef struct s_all
@@ -80,7 +81,9 @@ typedef struct s_all
 
 int		main_philo(int ac, const char **av);
 void	f_parse_av(t_all *all, int ac, const char **av);
+void	philos_init(t_philos *philos, t_all *all);
 
+void	*f_calloc(size_t block_size, size_t count, t_error *error);
 void	f_puterr(const char *s);
 void	f_put_usage(void);
 
