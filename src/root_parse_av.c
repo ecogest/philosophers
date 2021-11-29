@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_parse_av.c                                       :+:      :+:    :+:   */
+/*   root_parse_av.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:58:20 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 13:53:56 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/29 14:03:25 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	root_parse_av(t_root *root, int ac, const char **av)
 {
 	const char	*strerr;
 
+	if (root->error)
+		return ;
 	err_check_av(&root->error, &strerr, ac, av);
 	if (!root->error)
 	{
