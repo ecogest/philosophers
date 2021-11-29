@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   put_error_and_usage.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/15 16:19:00 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/28 16:35:02 by mjacq            ###   ########.fr       */
+/*   Created: 2021/11/28 17:34:42 by mjacq             #+#    #+#             */
+/*   Updated: 2021/11/29 12:09:56 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int ac, const char **av)
+void	f_puterr(const char *s)
 {
-	t_all	all;
+	ft_putstr_fd("\e[31mError: ", 2);
+	ft_putstr_fd(s, 2);
+	ft_putstr_fd("\e[0m\n", 2);
+}
 
-	f_parse_av(&all, ac, av);
-	return (0);
+void	f_put_usage(void)
+{
+	ft_putstr_fd("\e[33mUsage: \e[1m./philo\e[0;33m number_of_philosophers " \
+			"time_to_die time_to_eat time_to_sleep " \
+			"[number_of_times_each_philosopher_must_eat]\n", 2);
 }
