@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:58:20 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 12:10:08 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/29 12:46:03 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,14 @@ void	f_parse_av(t_all *all, int ac, const char **av)
 	err_check_av(&all->error, &strerr, ac, av);
 	if (!all->error)
 	{
-		all->philos.philo_count = ft_atoi(av[1]);
+		all->philos.count = ft_atoi(av[1]);
 		all->philo_param.tt_die = ft_atoi(av[2]);
 		all->philo_param.tt_eat = ft_atoi(av[3]);
 		all->philo_param.tt_sleep = ft_atoi(av[4]);
 		if (ac == 6)
 			all->philo_param.max_meal = ft_atoi(av[5]);
 		printf("philos: %d\nttd: %d\ntte: %d\ntts:%d\nmax meals: %d\n", \
-				all->philos.philo_count, \
+				all->philos.count, \
 				all->philo_param.tt_die, all->philo_param.tt_eat, \
 				all->philo_param.tt_sleep, all->philo_param.max_meal);
 	}
