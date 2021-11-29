@@ -11,10 +11,12 @@ CXX       = clang++
 CPPFLAGS  = -Iincludes
 CPPFLAGS += -Ilibft/includes
 CFLAGS    = -Wall -Werror -Wextra
-# CFLAGS   += -g -fsanitize=address
-# CFLAGS   += -fsanitize=thread
-LDFLAGS   = -Llibft -lft
+CFLAGS   += -g
+LDFLAGS   = -Llibft -lft -lpthread
+# CFLAGS   += -fsanitize=address
 # LDFLAGS  += -lasan
+# CFLAGS   += -fsanitize=thread
+# LDFLAGS  += -ltsan
 
 #  ========================== SOURCES AND OBJECTS ===========================  #
 
