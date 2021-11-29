@@ -6,38 +6,52 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 12:24:29 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 14:08:28 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/29 14:55:01 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// TODO:
-void	philos_lock_start(t_philos *philos)
+void	*philo_job(void *phil)
 {
-	(void)philos;
+	t_philo	*philo;
+
+	philo = phil;
+	pthread_mutex_lock(philo->mu_stdout);
+	printf("tid: %ld\n", philo->tid);
+	pthread_mutex_unlock(philo->mu_stdout);
+	return (NULL);
 }
 
 // TODO:
+void	philos_lock_start(t_philos *philos)
+{
+	if (philos->error)
+		return ;
+}
+
+// TODO: check return of pthread_create
 void	philos_create_threads(t_philos *philos)
 {
-	(void)philos;
+	t_philo	*philo;
+	int		i;
+
+	if (philos->error)
+		return ;
+	i = 0;
+	while (i < philos->count)
+	{
+		philo = &philos->array[i];
+		pthread_create(&philo->tid, NULL, philo_job, (void *)philo);
+		i++;
+	}
 }
 
 // TODO:
 void	philos_run_threads(t_philos *philos)
 {
-	(void)philos;
-}
-
-/*
-** @brief default params (max_meal = -1) + stdout mutex init
-*/
-
-void	root_init(t_root *root)
-{
-	*root = (t_root){.philo_param.max_meal = -1};
-	f_mutex_init(&root->mu_stdout, &root->error);
+	if (philos->error)
+		return ;
 }
 
 int	main_philo(int ac, const char **av)

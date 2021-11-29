@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 14:01:02 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/29 14:30:46 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_root
 
 // Main frame
 int		main_philo(int ac, const char **av);
+void	root_init(t_root *root);
 void	root_parse_av(t_root *all, int ac, const char **av);
 void	philos_init(t_philos *philos, t_root *all);
 
