@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 11:48:00 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/29 12:09:02 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,6 @@ typedef struct s_all
 void	f_parse_av(t_all *all, int ac, const char **av);
 
 void	f_puterr(const char *s);
-void	f_usage(void);
+void	f_put_usage(void);
 
 #endif

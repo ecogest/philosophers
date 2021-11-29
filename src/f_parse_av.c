@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:58:20 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 12:07:03 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/29 12:10:08 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,6 @@ void	f_parse_av(t_all *all, int ac, const char **av)
 	else
 	{
 		f_puterr(strerr);
-		f_usage();
+		f_put_usage();
 	}
 }
