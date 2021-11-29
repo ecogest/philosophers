@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 16:05:05 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/28 16:45:59 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/29 13:53:56 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ class	AvErrorTest: public ::testing::TestWithParam<std::tuple<t_error,int,std::v
 		t_error	actual_err;
 		t_error	theoritical_err;
 		AvErrorTest() {
-			t_all	all;
+			t_root	all;
 			int		ac              = std::get<1>(GetParam());
 			const char	* const *av = std::get<2>(GetParam()).data();
 			theoritical_err         = std::get<0>(GetParam());
-			f_parse_av(&all, ac, (const char **)av);
+			root_parse_av(&all, ac, (const char **)av);
 			actual_err = all.error;
 		}
 };

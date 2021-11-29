@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_error_and_usage.c                              :+:      :+:    :+:   */
+/*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/28 17:34:42 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 14:05:59 by mjacq            ###   ########.fr       */
+/*   Created: 2021/11/29 13:42:37 by mjacq             #+#    #+#             */
+/*   Updated: 2021/11/29 13:52:39 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	f_puterr(const char *s)
+void	philos_cleanup(t_philos *philos)
 {
-	ft_putstr_fd("\e[31mError: ", 2);
-	ft_putstr_fd(s, 2);
-	ft_putstr_fd("\e[0m\n", 2);
+	free(philos->array);
+	philos->array = NULL;
 }
 
-void	f_put_usage(void)
+void	root_cleanup(t_root *all)
 {
-	ft_putstr_fd("\e[33mUsage: \e[1m./philo\e[0;33m number_of_philosophers " \
-			"time_to_die time_to_eat time_to_sleep " \
-			"[number_of_times_each_philosopher_must_eat]\e[0m\n", 2);
+	philos_cleanup(&all->philos);
+	pthread_mutex_destroy(&all->mu_stdout);
 }

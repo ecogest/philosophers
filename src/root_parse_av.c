@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_parse_av.c                                       :+:      :+:    :+:   */
+/*   root_parse_av.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:58:20 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 12:46:03 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/29 14:03:25 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,24 +62,25 @@ static void
 ** max meal: -1 if not specified
 */
 
-void	f_parse_av(t_all *all, int ac, const char **av)
+void	root_parse_av(t_root *root, int ac, const char **av)
 {
 	const char	*strerr;
 
-	*all = (t_all){.philo_param.max_meal = -1};
-	err_check_av(&all->error, &strerr, ac, av);
-	if (!all->error)
+	if (root->error)
+		return ;
+	err_check_av(&root->error, &strerr, ac, av);
+	if (!root->error)
 	{
-		all->philos.count = ft_atoi(av[1]);
-		all->philo_param.tt_die = ft_atoi(av[2]);
-		all->philo_param.tt_eat = ft_atoi(av[3]);
-		all->philo_param.tt_sleep = ft_atoi(av[4]);
+		root->philos.count = ft_atoi(av[1]);
+		root->philo_param.tt_die = ft_atoi(av[2]);
+		root->philo_param.tt_eat = ft_atoi(av[3]);
+		root->philo_param.tt_sleep = ft_atoi(av[4]);
 		if (ac == 6)
-			all->philo_param.max_meal = ft_atoi(av[5]);
+			root->philo_param.max_meal = ft_atoi(av[5]);
 		printf("philos: %d\nttd: %d\ntte: %d\ntts:%d\nmax meals: %d\n", \
-				all->philos.count, \
-				all->philo_param.tt_die, all->philo_param.tt_eat, \
-				all->philo_param.tt_sleep, all->philo_param.max_meal);
+				root->philos.count, \
+				root->philo_param.tt_die, root->philo_param.tt_eat, \
+				root->philo_param.tt_sleep, root->philo_param.max_meal);
 	}
 	else
 	{
