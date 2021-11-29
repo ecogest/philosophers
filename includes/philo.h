@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 18:51:42 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/29 19:23:06 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,21 @@ typedef enum e_action
 	unset = 0,
 	eating,
 	sleeping,
-	thinking
+	thinking,
+	taking_fork,
+	died
 }	t_action;
 
 /*
 ** =============================== Structures =============================== **
 */
+
+typedef struct s_action_display
+{
+	t_action	action;
+	const char	*color;
+	const char	*stract;
+}				t_action_display;
 
 typedef struct s_philo_param
 {
@@ -64,6 +73,7 @@ typedef struct s_forks
 typedef struct s_philostate
 {
 	uint		timestamp;
+	uint		delta_time;
 	t_action	action;
 }				t_philostate;
 
