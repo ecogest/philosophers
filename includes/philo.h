@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 14:30:46 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/29 18:51:42 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 */
 
 # include "libft.h" // TODO: Remove libft
-# include <stdbool.h>
 # include <stdio.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 /*
 ** ================================= Enums ================================== **
@@ -34,17 +34,26 @@ typedef enum e_error
 	error_malloc
 }	t_error;
 
+typedef enum e_action
+{
+	unset = 0,
+	eating,
+	sleeping,
+	thinking
+}	t_action;
+
 /*
 ** =============================== Structures =============================== **
 */
 
 typedef struct s_philo_param
 {
-	int	tt_die;
-	int	tt_eat;
-	int	tt_sleep;
-	int	max_meal;
-}		t_philo_param;
+	int				tt_die;
+	int				tt_eat;
+	int				tt_sleep;
+	int				max_meal;
+	struct timeval	tv_start;
+}					t_philo_param;
 
 typedef struct s_forks
 {
@@ -52,10 +61,18 @@ typedef struct s_forks
 	pthread_mutex_t	*right;
 }					t_forks;
 
+typedef struct s_philostate
+{
+	uint		timestamp;
+	t_action	action;
+}				t_philostate;
+
 typedef struct s_philo
 {
 	pthread_t		tid;
 	t_philo_param	*param;
+	t_philostate	state;
+	int				meal_count;
 	t_forks			forks;
 	pthread_mutex_t	*mu_stdout;
 }					t_philo;
@@ -84,6 +101,7 @@ int		main_philo(int ac, const char **av);
 void	root_init(t_root *root);
 void	root_parse_av(t_root *all, int ac, const char **av);
 void	philos_init(t_philos *philos, t_root *all);
+void	*philo_job(void *phil);
 
 // Syscall wrapped
 void	*f_calloc(size_t block_size, size_t count, t_error *error);
