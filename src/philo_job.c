@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 18:09:51 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 14:27:59 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 15:25:06 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	philo_get_time(t_philo *philo)
 	if (philo->error)
 		return ;
 	philo->error = gettimeofday(&tv, NULL);
-	philo->state.timestamp = f_tv_to_timestamp(&tv, &philo->param->tv_start);
+	philo->activity.start = f_tv_to_timestamp(&tv, &philo->param->tv_start);
 }
 
 void	philo_do(t_philo *philo, t_action action)
@@ -28,7 +28,7 @@ void	philo_do(t_philo *philo, t_action action)
 
 	if (philo->error)
 		return ;
-	philo->state.action = action;
+	philo->activity.type = action;
 	if (action == taking_lfork || action == taking_rfork)
 		philo_take_fork(philo);
 	philo_get_time(philo);

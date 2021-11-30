@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 14:54:18 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 15:29:41 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ typedef enum e_action
 	died
 }	t_action;
 
+typedef enum e_philo_status
+{
+	active,
+	sated,
+	dead
+}	t_philo_status;
+
 /*
 ** =============================== Structures =============================== **
 */
@@ -71,12 +78,12 @@ typedef struct s_forks
 	pthread_mutex_t	*right;
 }					t_forks;
 
-typedef struct s_philostate
+typedef struct s_activity
 {
-	uint		timestamp;
+	uint		start;
 	uint		delta_time;
-	t_action	action;
-}				t_philostate;
+	t_action	type;
+}				t_activity;
 
 typedef struct s_mutex_root
 {
@@ -90,7 +97,8 @@ typedef struct s_philo
 	int				id;
 	pthread_t		tid;
 	t_philo_param	*param;
-	t_philostate	state;
+	t_philo_status	status;
+	t_activity		activity;
 	int				meal_count;
 	t_forks			forks;
 	t_mutex_root	*mu;
