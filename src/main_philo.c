@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 12:24:29 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 14:56:09 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 16:51:51 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int	main_philo(int ac, const char **av)
 	}
 	if (root.philos.error)
 		root.error = root.philos.error;
+	else if (root.philos.status.error)
+		root.error = root.philos.status.error;
 	root_cleanup(&root);
 	return (root.error);
 }
