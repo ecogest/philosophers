@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 18:09:51 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 10:41:38 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 10:46:04 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ void	philo_get_time(t_philo *philo)
 	struct timeval	tv;
 	struct timeval	diff;
 
-	gettimeofday(&tv, NULL);
+	if (philo->error)
+		return ;
+	philo->error = gettimeofday(&tv, NULL);
 	diff.tv_sec = tv.tv_sec - philo->param->tv_start.tv_sec;
 	diff.tv_usec = tv.tv_usec - philo->param->tv_start.tv_usec;
 	philo->state.timestamp = diff.tv_sec * 1000 + diff.tv_usec / 1000;
@@ -25,6 +27,8 @@ void	philo_get_time(t_philo *philo)
 
 void	philo_do(t_philo *philo, t_action action)
 {
+	if (philo->error)
+		return ;
 	philo->state.action = action;
 	philo_get_time(philo);
 	philo_print_action(philo);

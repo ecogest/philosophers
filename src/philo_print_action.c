@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 10:39:49 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 10:43:14 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 10:45:15 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	philo_print_action(t_philo *philo)
 {
 	t_action_display	display;
 
+	if (philo->error)
+		return ;
 	display = action_get_display(philo->state.action);
 	f_mu_lock(philo->mu_stdout, &philo->error);
 	if (philo->error)
