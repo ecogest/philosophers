@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 18:09:51 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 11:07:30 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 11:39:21 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,35 @@ void	philo_get_time(t_philo *philo)
 	philo->state.timestamp = tv_to_timestamp(&tv, &philo->param->tv_start);
 }
 
+void	f_ms_sleep(int millisec)
+{
+	usleep(millisec * 1000);
+}
+
+int	action_get_duration(t_action action, t_philo_param *param)
+{
+	if (action == sleeping)
+		return (param->tt_sleep);
+	else if (action == eating)
+		return (param->tt_eat);
+	else if (action == died)
+		return (param->tt_die);
+	else
+		return (0);
+}
+
 void	philo_do(t_philo *philo, t_action action)
 {
+	int	duration;
+
 	if (philo->error)
 		return ;
 	philo->state.action = action;
 	philo_get_time(philo);
 	philo_print_action(philo);
-	usleep(philo->param->tt_sleep * 1000);
+	duration = action_get_duration(action, philo->param);
+	if (duration)
+		f_ms_sleep(duration);
 }
 
 void	philo_cycle(t_philo *philo)
