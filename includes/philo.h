@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 13:11:42 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 14:16:06 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,13 @@ typedef struct s_philostate
 	t_action	action;
 }				t_philostate;
 
+typedef struct s_mutex_root
+{
+	pthread_mutex_t	stdout;
+	pthread_mutex_t	stderr;
+	pthread_mutex_t	start;
+}					t_mutex_root;
+
 typedef struct s_philo
 {
 	int				id;
@@ -86,7 +93,7 @@ typedef struct s_philo
 	t_philostate	state;
 	int				meal_count;
 	t_forks			forks;
-	pthread_mutex_t	*mu_stdout;
+	t_mutex_root	*mu;
 	t_error			error;
 }					t_philo;
 
@@ -100,7 +107,7 @@ typedef struct s_philos
 typedef struct s_root
 {
 	t_philo_param	philo_param;
-	pthread_mutex_t	mu_stdout;
+	t_mutex_root	mu;
 	t_philos		philos;
 	t_error			error;
 }					t_root;
