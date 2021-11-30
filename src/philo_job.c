@@ -6,20 +6,11 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 18:09:51 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 11:39:21 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 11:44:37 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-uint	tv_to_timestamp(struct timeval *now, struct timeval *start)
-{
-	struct timeval	diff;
-
-	diff.tv_sec = now->tv_sec - start->tv_sec;
-	diff.tv_usec = now->tv_usec - start->tv_usec;
-	return (diff.tv_sec * 1000 + diff.tv_usec / 1000);
-}
 
 void	philo_get_time(t_philo *philo)
 {
@@ -28,12 +19,7 @@ void	philo_get_time(t_philo *philo)
 	if (philo->error)
 		return ;
 	philo->error = gettimeofday(&tv, NULL);
-	philo->state.timestamp = tv_to_timestamp(&tv, &philo->param->tv_start);
-}
-
-void	f_ms_sleep(int millisec)
-{
-	usleep(millisec * 1000);
+	philo->state.timestamp = f_tv_to_timestamp(&tv, &philo->param->tv_start);
 }
 
 int	action_get_duration(t_action action, t_philo_param *param)
