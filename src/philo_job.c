@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 18:09:51 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 17:29:24 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 17:33:42 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	philo_activity_start(t_philo *philo)
 	philo->error = gettimeofday(&tv, NULL);
 	philo->activity.start = f_tv_to_timestamp(&tv, &philo->param->tv_start);
 	if (philo->activity.type == eating)
-		philo->activity.last_meal = philo->activity.start;
+		philo->activity.last_mealtime = philo->activity.start;
 }
 
 void	philo_do(t_philo *philo, t_action action)

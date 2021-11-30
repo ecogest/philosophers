@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 17:29:06 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 17:34:47 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ typedef enum e_action
 	died
 }	t_action;
 
+typedef enum e_status_update
+{
+	sated,
+	dead,
+	error_occured
+}	t_status_update;
+
 /*
 ** =============================== Structures =============================== **
 */
@@ -76,7 +83,7 @@ typedef struct s_activity
 	t_action	type;
 	uint		start;
 	uint		delta_time;
-	uint		last_meal;
+	uint		last_mealtime;
 }				t_activity;
 
 typedef struct s_mutex_root
@@ -85,13 +92,6 @@ typedef struct s_mutex_root
 	pthread_mutex_t	stderr;
 	pthread_mutex_t	start;
 }					t_mutex_root;
-
-typedef enum e_status_update
-{
-	sated,
-	dead,
-	error_occured
-}	t_status_update;
 
 typedef struct s_philos_status
 {
