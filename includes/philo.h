@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 10:18:36 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 10:41:07 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,11 @@ int		main_philo(int ac, const char **av);
 void	root_init(t_root *root);
 void	root_parse_av(t_root *all, int ac, const char **av);
 void	philos_init(t_philos *philos, t_root *all);
+
+// job functions
 void	*philo_job(void *phil);
+void	philo_get_time(t_philo *philo);
+void	philo_print_action(t_philo *philo);
 
 // Syscall wrapped
 void	*f_calloc(size_t block_size, size_t count, t_error *error);
