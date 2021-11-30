@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 11:51:14 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 12:06:44 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ typedef enum e_action
 	eating,
 	sleeping,
 	thinking,
-	taking_fork,
+	taking_lfork,
+	taking_rfork,
 	died
 }	t_action;
 
