@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 11:44:37 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 11:51:14 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_action_display
 	t_action	action;
 	const char	*color;
 	const char	*stract;
-}				t_action_display;
+}				t_act_d;
 
 typedef struct s_philo_param
 {
@@ -118,6 +118,10 @@ void	philos_init(t_philos *philos, t_root *all);
 void	*philo_job(void *phil);
 void	philo_get_time(t_philo *philo);
 void	philo_print_action(t_philo *philo);
+
+// action params
+int		action_get_duration(t_action action, t_philo_param *param);
+t_act_d	action_get_display(t_action action);
 
 // Syscall wrapped
 void	*f_calloc(size_t block_size, size_t count, t_error *error);

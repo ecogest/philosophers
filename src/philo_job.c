@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 18:09:51 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 11:44:37 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 11:49:46 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,6 @@ void	philo_get_time(t_philo *philo)
 		return ;
 	philo->error = gettimeofday(&tv, NULL);
 	philo->state.timestamp = f_tv_to_timestamp(&tv, &philo->param->tv_start);
-}
-
-int	action_get_duration(t_action action, t_philo_param *param)
-{
-	if (action == sleeping)
-		return (param->tt_sleep);
-	else if (action == eating)
-		return (param->tt_eat);
-	else if (action == died)
-		return (param->tt_die);
-	else
-		return (0);
 }
 
 void	philo_do(t_philo *philo, t_action action)
