@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 18:09:51 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 13:11:48 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 13:51:18 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,16 @@ void	philo_do(t_philo *philo, t_action action)
 
 void	philo_cycle(t_philo *philo)
 {
-	philo_do(philo, taking_lfork);
-	philo_do(philo, taking_rfork);
+	if (philo->id % 2)
+	{
+		philo_do(philo, taking_lfork);
+		philo_do(philo, taking_rfork);
+	}
+	else
+	{
+		philo_do(philo, taking_rfork);
+		philo_do(philo, taking_lfork);
+	}
 	philo_do(philo, eating);
 	philo->meal_count++;
 	philo_do(philo, sleeping);
