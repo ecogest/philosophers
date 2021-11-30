@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 19:23:06 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 10:57:21 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct s_philo
 	int				meal_count;
 	t_forks			forks;
 	pthread_mutex_t	*mu_stdout;
+	t_error			error;
 }					t_philo;
 
 typedef struct s_philos
@@ -111,11 +112,18 @@ int		main_philo(int ac, const char **av);
 void	root_init(t_root *root);
 void	root_parse_av(t_root *all, int ac, const char **av);
 void	philos_init(t_philos *philos, t_root *all);
+
+// job functions
 void	*philo_job(void *phil);
+void	philo_get_time(t_philo *philo);
+void	philo_print_action(t_philo *philo);
 
 // Syscall wrapped
 void	*f_calloc(size_t block_size, size_t count, t_error *error);
 void	f_mutex_init(pthread_mutex_t *mu, t_error *error);
+void	f_mu_lock(pthread_mutex_t *mu, t_error *error);
+void	f_mu_unlock(pthread_mutex_t *mu, t_error *error);
+void	f_thread(t_philo *philo, void *(*job)(void *));
 
 // Printing messages
 void	f_puterr(const char *s);
