@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 18:09:51 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 17:21:51 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 17:29:24 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,29 +42,7 @@ void	philo_do(t_philo *philo, t_action action)
 		philo_replace_forks(philo);
 }
 
-/*
-** We want the neighbours to compete for the same fork first
-** Then the winner can take the second one
-** Otherwise every philosopher could end up with only one fork.
-*/
-
-void	philo_take_forks(t_philo *philo)
-{
-	if (philo->error)
-		return ;
-	if (philo->id % 2)
-	{
-		philo_do(philo, taking_lfork);
-		philo_do(philo, taking_rfork);
-	}
-	else
-	{
-		philo_do(philo, taking_rfork);
-		philo_do(philo, taking_lfork);
-	}
-}
-
-void	philo_cycle(t_philo *philo)
+static void	philo_cycle(t_philo *philo)
 {
 	philo_take_forks(philo);
 	philo_do(philo, eating);
