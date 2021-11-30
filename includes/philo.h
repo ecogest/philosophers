@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 14:16:06 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 14:54:18 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ void	*f_calloc(size_t block_size, size_t count, t_error *error);
 void	f_mutex_init(pthread_mutex_t *mu, t_error *error);
 void	f_mu_lock(pthread_mutex_t *mu, t_error *error);
 void	f_mu_unlock(pthread_mutex_t *mu, t_error *error);
-void	f_thread(t_philo *philo, void *(*job)(void *));
+void	f_thread(t_philo *philo, void *(*job)(void *), t_error *error);
 void	f_ms_sleep(int millisec);
 
 // Misc utils

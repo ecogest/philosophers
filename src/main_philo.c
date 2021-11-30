@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 12:24:29 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 14:39:37 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 14:56:09 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,11 @@ void	philos_create_threads(t_philos *philos)
 	while (i < philos->count)
 	{
 		philo = &philos->array[i];
-		f_thread(philo, philo_job);
-		if (philo->error)
+		f_thread(philo, philo_job, &philos->error);
+		if (philos->error)
 			break ;
 		i++;
 	}
-	if (philo->error)
-		philos->error = philo->error;
 }
 
 // TODO: check if should do in case of error
@@ -59,11 +57,17 @@ void	philos_wait(t_philos *philos)
 	{
 		philo = &philos->array[i];
 		if (philo->tid)
+		{
 			pthread_join(philo->tid, NULL);
+			if (philo->error)
+				philos->error = philo->error;
+		}
 		i++;
 	}
 }
 
+/* philos_lock_start(&root.philos, &root.mu.start); */
+/* philos_run_threads(&root.philos, &root.mu.start); */
 int	main_philo(int ac, const char **av)
 {
 	t_root	root;
@@ -73,10 +77,8 @@ int	main_philo(int ac, const char **av)
 	if (!root.error)
 	{
 		philos_init(&root.philos, &root);
-		philos_lock_start(&root.philos, &root.mu.start);
 		gettimeofday(&root.philo_param.tv_start, NULL);
 		philos_create_threads(&root.philos);
-		philos_run_threads(&root.philos, &root.mu.start);
 		philos_wait(&root.philos);
 	}
 	if (root.philos.error)
