@@ -6,14 +6,14 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 13:11:06 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 15:25:06 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 17:18:01 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 // TODO: die if fork == NULL
-void	philo_take_fork(t_philo *philo)
+void	philo_pick_a_fork(t_philo *philo)
 {
 	pthread_mutex_t	*fork;
 

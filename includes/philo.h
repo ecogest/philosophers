@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 16:42:34 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 17:18:00 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,10 @@ typedef struct s_forks
 
 typedef struct s_activity
 {
+	t_action	type;
 	uint		start;
 	uint		delta_time;
-	t_action	type;
+	uint		last_meal;
 }				t_activity;
 
 typedef struct s_mutex_root
@@ -141,9 +142,9 @@ void	philos_init(t_philos *philos, t_root *all);
 
 // job functions
 void	*philo_job(void *phil);
-void	philo_get_time(t_philo *philo);
+void	philo_activity_start(t_philo *philo);
 void	philo_print_action(t_philo *philo);
-void	philo_take_fork(t_philo *philo);
+void	philo_pick_a_fork(t_philo *philo);
 void	philo_replace_forks(t_philo *philo);
 bool	philo_should_stop(t_philo *philo);
 
