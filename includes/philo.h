@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 19:23:06 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 10:18:36 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct s_philo
 	int				meal_count;
 	t_forks			forks;
 	pthread_mutex_t	*mu_stdout;
+	t_error			error;
 }					t_philo;
 
 typedef struct s_philos
@@ -116,6 +117,8 @@ void	*philo_job(void *phil);
 // Syscall wrapped
 void	*f_calloc(size_t block_size, size_t count, t_error *error);
 void	f_mutex_init(pthread_mutex_t *mu, t_error *error);
+void	f_mu_lock(pthread_mutex_t *mu, t_error *error);
+void	f_mu_unlock(pthread_mutex_t *mu, t_error *error);
 
 // Printing messages
 void	f_puterr(const char *s);

@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 18:09:51 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 19:48:39 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 10:18:26 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ void	philo_print_action(t_philo *philo)
 	i = 0;
 	while (philo->state.action != actions[i].action)
 		i++;
-	pthread_mutex_lock(philo->mu_stdout);
+	f_mu_lock(philo->mu_stdout, &philo->error);
+	if (philo->error)
+		return ;
 	printf("\e[38m%u\e[0m \e[1m%ld\e[0m %s%s\e[0m\n", philo->state.timestamp, \
 			philo->tid, actions[i].color, actions[i].stract);
-	pthread_mutex_unlock(philo->mu_stdout);
+	f_mu_unlock(philo->mu_stdout, &philo->error);
 }
 
 void	philo_do(t_philo *philo, t_action action)
@@ -67,6 +69,8 @@ void	*philo_job(void *phil)
 	while (philo->meal_count != philo->param->max_meal)
 	{
 		philo_cycle(philo);
+		if (philo->error)
+			break ;
 	}
 	return (NULL);
 }
