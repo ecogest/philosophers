@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 12:24:29 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 18:24:38 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 10:59:45 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	philos_lock_start(t_philos *philos)
 		return ;
 }
 
-// TODO: check return of pthread_create
 void	philos_create_threads(t_philos *philos)
 {
 	t_philo	*philo;
@@ -31,9 +30,13 @@ void	philos_create_threads(t_philos *philos)
 	while (i < philos->count)
 	{
 		philo = &philos->array[i];
-		pthread_create(&philo->tid, NULL, philo_job, (void *)philo);
+		f_thread(philo, philo_job);
+		if (philo->error)
+			break ;
 		i++;
 	}
+	if (philo->error)
+		philos->error = philo->error;
 }
 
 // TODO:
