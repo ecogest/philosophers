@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 12:24:29 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 11:09:42 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 12:59:47 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	philos_create_threads(t_philos *philos)
 		if (philo->error)
 			break ;
 		i++;
-		philo->id = i;
 	}
 	if (philo->error)
 		philos->error = philo->error;
