@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:42:37 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 14:15:54 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 14:37:42 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	philo_cleanup(t_philo *philo)
 {
-	if (philo->tid)
-		pthread_join(philo->tid, NULL);
 	pthread_mutex_destroy(&philo->forks.left);
 }
 

@@ -6,17 +6,17 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 12:24:29 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 12:59:47 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 14:39:37 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// TODO:
-void	philos_lock_start(t_philos *philos)
+void	philos_lock_start(t_philos *philos, pthread_mutex_t *mu_start)
 {
 	if (philos->error)
 		return ;
+	f_mu_lock(mu_start, &philos->error);
 }
 
 void	philos_create_threads(t_philos *philos)
@@ -39,11 +39,29 @@ void	philos_create_threads(t_philos *philos)
 		philos->error = philo->error;
 }
 
-// TODO:
-void	philos_run_threads(t_philos *philos)
+// TODO: check if should do in case of error
+void	philos_run_threads(t_philos *philos, pthread_mutex_t *mu_start)
 {
 	if (philos->error)
 		return ;
+	f_mu_unlock(mu_start, &philos->error);
+}
+
+void	philos_wait(t_philos *philos)
+{
+	int		i;
+	t_philo	*philo;
+
+	if (!philos)
+		return ;
+	i = 0;
+	while (i < philos->count)
+	{
+		philo = &philos->array[i];
+		if (philo->tid)
+			pthread_join(philo->tid, NULL);
+		i++;
+	}
 }
 
 int	main_philo(int ac, const char **av)
@@ -55,13 +73,14 @@ int	main_philo(int ac, const char **av)
 	if (!root.error)
 	{
 		philos_init(&root.philos, &root);
-		philos_lock_start(&root.philos);
+		philos_lock_start(&root.philos, &root.mu.start);
 		gettimeofday(&root.philo_param.tv_start, NULL);
 		philos_create_threads(&root.philos);
-		philos_run_threads(&root.philos);
-		if (root.philos.error)
-			root.error = root.philos.error;
+		philos_run_threads(&root.philos, &root.mu.start);
+		philos_wait(&root.philos);
 	}
+	if (root.philos.error)
+		root.error = root.philos.error;
 	root_cleanup(&root);
 	return (root.error);
 }

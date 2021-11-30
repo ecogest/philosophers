@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 18:09:51 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 14:04:57 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 14:27:59 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	*philo_job(void *phil)
 	t_philo	*philo;
 
 	philo = phil;
+	f_mu_lock(&philo->mu->start, &philo->error);
+	f_mu_unlock(&philo->mu->start, &philo->error);
 	while (philo->meal_count != philo->param->max_meal)
 	{
 		philo_cycle(philo);
