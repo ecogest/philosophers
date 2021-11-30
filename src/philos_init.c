@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:25:47 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 13:00:11 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 13:09:08 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ static void	philo_fill_params(t_philo *philo, t_root *all)
 ** @brief return the neighbour from the right (NULL if none)
 */
 
-static t_philo	*philo_get_neighbour(t_philos *philos, int i)
+static t_philo	*philo_get_neighbour(int philo_id, t_philos *philos)
 {
 	t_philo	*neighbour;
+	int		i;
 
+	i = philo_id - 1;
 	if (philos->count == 1)
 		neighbour = NULL;
 	else if (i < philos->count - 1)
@@ -58,7 +60,7 @@ void	philos_init(t_philos *philos, t_root *all)
 			philo_fill_params(philo, all);
 			philo->id = i + 1;
 			f_mutex_init(&philo->forks.left, &philo->error);
-			neighbour = philo_get_neighbour(philos, i);
+			neighbour = philo_get_neighbour(philo->id, philos);
 			if (neighbour)
 				philo->forks.right = &neighbour->forks.left;
 			i++;
