@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 12:06:44 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 13:11:42 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ void	philos_init(t_philos *philos, t_root *all);
 void	*philo_job(void *phil);
 void	philo_get_time(t_philo *philo);
 void	philo_print_action(t_philo *philo);
+void	philo_take_fork(t_philo *philo);
+void	philo_replace_forks(t_philo *philo);
 
 // action params
 int		action_get_duration(t_action action, t_philo_param *param);

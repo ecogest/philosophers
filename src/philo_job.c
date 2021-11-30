@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 18:09:51 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 12:27:29 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 13:11:48 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,30 +20,6 @@ void	philo_get_time(t_philo *philo)
 		return ;
 	philo->error = gettimeofday(&tv, NULL);
 	philo->state.timestamp = f_tv_to_timestamp(&tv, &philo->param->tv_start);
-}
-
-// TODO: die if fork == NULL
-void	philo_take_fork(t_philo *philo)
-{
-	pthread_mutex_t	*fork;
-
-	if (philo->error)
-		return ;
-	if (philo->state.action == taking_lfork)
-		fork = &philo->forks.left;
-	else
-		fork = philo->forks.right;
-	if (fork)
-		f_mu_lock(fork, &philo->error);
-	else
-		f_puterr("Missing fork.");
-}
-
-void	philo_replace_forks(t_philo *philo)
-{
-	f_mu_unlock(&philo->forks.left, &philo->error);
-	if (philo->forks.right)
-		f_mu_unlock(philo->forks.right, &philo->error);
 }
 
 void	philo_do(t_philo *philo, t_action action)
