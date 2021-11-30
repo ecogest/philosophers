@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 10:57:21 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 11:09:20 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_philostate
 
 typedef struct s_philo
 {
+	int				id;
 	pthread_t		tid;
 	t_philo_param	*param;
 	t_philostate	state;
