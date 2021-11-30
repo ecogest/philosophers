@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 18:09:51 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 16:20:11 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 16:42:43 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,6 @@ void	philo_do(t_philo *philo, t_action action)
 		philo_replace_forks(philo);
 }
 
-bool	philo_should_stop(t_philo *philo)
-{
-	bool	ret;
-
-	if (philo->error)
-		return (true);
-	f_mu_lock(&philo->status->mu, &philo->error);
-	if (philo->status->sated_philosphers == 4)//FIX
-		ret = true;
-	else if (philo->status->dead_philosophers)
-		ret = true;
-	else
-		ret = false;
-	f_mu_unlock(&philo->status->mu, &philo->error);
-	return (ret);
-}
-
 /*
 ** We want the neighbours to compete for the same fork first
 ** Then the winner can take the second one
@@ -77,18 +60,6 @@ void	philo_take_forks(t_philo *philo)
 		philo_do(philo, taking_rfork);
 		philo_do(philo, taking_lfork);
 	}
-}
-
-void	philo_update_status(t_philo *philo, t_status_update update)
-{
-	f_mu_lock(&philo->status->mu, &philo->error);
-	if (philo->error)
-		philo->status->error = philo->error;
-	else if (update == sated)
-		philo->status->sated_philosphers++;
-	else if (update == dead)
-		philo->status->dead_philosophers++;
-	f_mu_unlock(&philo->status->mu, &philo->error);
 }
 
 void	philo_cycle(t_philo *philo)

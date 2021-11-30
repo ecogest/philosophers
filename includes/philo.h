@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 16:06:03 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 16:42:34 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ typedef enum e_status_update
 
 typedef struct s_philos_status
 {
-	int				sated_philosphers;
+	int				hungry_philosphers;
 	int				dead_philosophers;
 	t_error			error;
 	pthread_mutex_t	mu;
@@ -146,6 +146,10 @@ void	philo_print_action(t_philo *philo);
 void	philo_take_fork(t_philo *philo);
 void	philo_replace_forks(t_philo *philo);
 bool	philo_should_stop(t_philo *philo);
+
+// status checking
+bool	philo_should_stop(t_philo *philo);
+void	philo_update_status(t_philo *philo, t_status_update update);
 
 // action params
 int		action_get_duration(t_action action, t_philo_param *param);
