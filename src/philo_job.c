@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 18:09:51 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 14:27:59 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 16:42:43 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ void	philo_get_time(t_philo *philo)
 	if (philo->error)
 		return ;
 	philo->error = gettimeofday(&tv, NULL);
-	philo->state.timestamp = f_tv_to_timestamp(&tv, &philo->param->tv_start);
+	philo->activity.start = f_tv_to_timestamp(&tv, &philo->param->tv_start);
 }
 
 void	philo_do(t_philo *philo, t_action action)
 {
 	int	duration;
 
-	if (philo->error)
+	if (philo_should_stop(philo))
 		return ;
-	philo->state.action = action;
+	philo->activity.type = action;
 	if (action == taking_lfork || action == taking_rfork)
 		philo_take_fork(philo);
 	philo_get_time(philo);
@@ -48,6 +48,8 @@ void	philo_do(t_philo *philo, t_action action)
 
 void	philo_take_forks(t_philo *philo)
 {
+	if (philo->error)
+		return ;
 	if (philo->id % 2)
 	{
 		philo_do(philo, taking_lfork);
@@ -65,6 +67,8 @@ void	philo_cycle(t_philo *philo)
 	philo_take_forks(philo);
 	philo_do(philo, eating);
 	philo->meal_count++;
+	if (philo->meal_count == philo->param->max_meal)
+		philo_update_status(philo, sated);
 	philo_do(philo, sleeping);
 	philo_do(philo, thinking);
 }
@@ -76,7 +80,7 @@ void	*philo_job(void *phil)
 	philo = phil;
 	f_mu_lock(&philo->mu->start, &philo->error);
 	f_mu_unlock(&philo->mu->start, &philo->error);
-	while (philo->meal_count != philo->param->max_meal)
+	while (!philo_should_stop(philo))
 	{
 		philo_cycle(philo);
 		if (philo->error)

@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:25:47 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 14:15:12 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 16:43:12 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,15 @@ static t_philo	*philo_get_neighbour(int philo_id, t_philos *philos)
 	return (neighbour);
 }
 
+void	philos_status_init(t_philos *philos, t_root *root)
+{
+	if (root->philo_param.max_meal != -1)
+		philos->status.hungry_philosphers = philos->count;
+	else
+		philos->status.hungry_philosphers = -1;
+	f_mutex_init(&philos->status.mu, &philos->error);
+}
+
 /*
 ** @brief Alloc the array of philos, pass their params and init forks
 */
@@ -49,6 +58,7 @@ void	philos_init(t_philos *philos, t_root *all)
 	t_philo	*philo;
 	t_philo	*neighbour;
 
+	philos_status_init(philos, all);
 	philos->array = f_calloc(philos->count, sizeof(*philos->array), \
 			&philos->error);
 	if (!philos->error)
@@ -59,6 +69,7 @@ void	philos_init(t_philos *philos, t_root *all)
 			philo = &philos->array[i];
 			philo_fill_params(philo, all);
 			philo->id = i + 1;
+			philo->status = &philos->status;
 			f_mutex_init(&philo->forks.left, &philo->error);
 			neighbour = philo_get_neighbour(philo->id, philos);
 			if (neighbour)

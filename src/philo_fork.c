@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 13:11:06 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 14:19:15 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 15:25:06 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	philo_take_fork(t_philo *philo)
 
 	if (philo->error)
 		return ;
-	if (philo->state.action == taking_lfork)
+	if (philo->activity.type == taking_lfork)
 		fork = &philo->forks.left;
 	else
 		fork = philo->forks.right;

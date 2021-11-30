@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 14:54:18 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 16:42:34 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ typedef struct s_forks
 	pthread_mutex_t	*right;
 }					t_forks;
 
-typedef struct s_philostate
+typedef struct s_activity
 {
-	uint		timestamp;
+	uint		start;
 	uint		delta_time;
-	t_action	action;
-}				t_philostate;
+	t_action	type;
+}				t_activity;
 
 typedef struct s_mutex_root
 {
@@ -85,12 +85,28 @@ typedef struct s_mutex_root
 	pthread_mutex_t	start;
 }					t_mutex_root;
 
+typedef enum e_status_update
+{
+	sated,
+	dead,
+	error_occured
+}	t_status_update;
+
+typedef struct s_philos_status
+{
+	int				hungry_philosphers;
+	int				dead_philosophers;
+	t_error			error;
+	pthread_mutex_t	mu;
+}					t_philos_status;
+
 typedef struct s_philo
 {
 	int				id;
 	pthread_t		tid;
 	t_philo_param	*param;
-	t_philostate	state;
+	t_philos_status	*status;
+	t_activity		activity;
 	int				meal_count;
 	t_forks			forks;
 	t_mutex_root	*mu;
@@ -99,9 +115,10 @@ typedef struct s_philo
 
 typedef struct s_philos
 {
-	int		count;
-	t_philo	*array;
-	t_error	error;
+	int				count;
+	t_philo			*array;
+	t_philos_status	status;
+	t_error			error;
 }			t_philos;
 
 typedef struct s_root
@@ -128,6 +145,11 @@ void	philo_get_time(t_philo *philo);
 void	philo_print_action(t_philo *philo);
 void	philo_take_fork(t_philo *philo);
 void	philo_replace_forks(t_philo *philo);
+bool	philo_should_stop(t_philo *philo);
+
+// status checking
+bool	philo_should_stop(t_philo *philo);
+void	philo_update_status(t_philo *philo, t_status_update update);
 
 // action params
 int		action_get_duration(t_action action, t_philo_param *param);
