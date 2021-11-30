@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:25:47 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 16:43:12 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 17:38:25 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	philo_fill_params(t_philo *philo, t_root *all)
 {
 	*philo = (t_philo){\
 		.param = &all->philo_param, \
-		.mu = &all->mu \
+		.mu_output = &all->mu_output \
 	};
 }
 

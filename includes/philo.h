@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 17:34:47 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 17:41:08 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,13 @@ typedef struct s_activity
 	uint		last_mealtime;
 }				t_activity;
 
-typedef struct s_mutex_root
+// TODO: remove start if not needed
+typedef struct s_mutex_output
 {
 	pthread_mutex_t	stdout;
 	pthread_mutex_t	stderr;
 	pthread_mutex_t	start;
-}					t_mutex_root;
+}					t_mutex_output;
 
 typedef struct s_philos_status
 {
@@ -110,7 +111,7 @@ typedef struct s_philo
 	t_activity		activity;
 	int				meal_count;
 	t_forks			forks;
-	t_mutex_root	*mu;
+	t_mutex_output	*mu_output;
 	t_error			error;
 }					t_philo;
 
@@ -125,7 +126,7 @@ typedef struct s_philos
 typedef struct s_root
 {
 	t_philo_param	philo_param;
-	t_mutex_root	mu;
+	t_mutex_output	mu_output;
 	t_philos		philos;
 	t_error			error;
 }					t_root;

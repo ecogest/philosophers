@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:42:37 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 15:57:40 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 17:38:02 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	philos_cleanup(t_philos *philos)
 void	root_cleanup(t_root *all)
 {
 	philos_cleanup(&all->philos);
-	pthread_mutex_destroy(&all->mu.stdout);
-	pthread_mutex_destroy(&all->mu.stderr);
-	pthread_mutex_destroy(&all->mu.start);
+	pthread_mutex_destroy(&all->mu_output.stdout);
+	pthread_mutex_destroy(&all->mu_output.stderr);
+	pthread_mutex_destroy(&all->mu_output.start);
 }

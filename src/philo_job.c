@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 18:09:51 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 17:33:42 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 17:40:03 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,17 @@ static void	philo_cycle(t_philo *philo)
 	philo_do(philo, thinking);
 }
 
+/* static void	philo_wait_for_start(t_philo *philo) */
+/* { */
+/* 	f_mu_lock(&philo->mu_output->start, &philo->error); */
+/* 	f_mu_unlock(&philo->mu_output->start, &philo->error); */
+/* } */
+
 void	*philo_job(void *phil)
 {
 	t_philo	*philo;
 
 	philo = phil;
-	f_mu_lock(&philo->mu->start, &philo->error);
-	f_mu_unlock(&philo->mu->start, &philo->error);
 	while (!philo_should_stop(philo))
 	{
 		philo_cycle(philo);

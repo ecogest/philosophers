@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 13:11:06 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 17:28:25 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 17:38:25 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	philo_pick_a_fork(t_philo *philo)
 		f_mu_lock(fork, &philo->error);
 	else
 	{
-		f_mu_lock(&philo->mu->stderr, &philo->error);
+		f_mu_lock(&philo->mu_output->stderr, &philo->error);
 		f_puterr("Missing fork.");
-		f_mu_unlock(&philo->mu->stderr, &philo->error);
+		f_mu_unlock(&philo->mu_output->stderr, &philo->error);
 	}
 }
 
