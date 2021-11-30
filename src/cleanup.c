@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:42:37 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 14:37:42 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 15:57:40 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	philos_cleanup(t_philos *philos)
 
 	if (philos->array)
 	{
+		pthread_mutex_destroy(&philos->status.mu);
 		i = 0;
 		while (i < philos->count)
 		{

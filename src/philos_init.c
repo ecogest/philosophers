@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:25:47 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 14:15:12 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/11/30 15:59:05 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,15 @@ void	philos_init(t_philos *philos, t_root *all)
 			&philos->error);
 	if (!philos->error)
 	{
+		/* philos->status = (t_philos_status){}; */
+		f_mutex_init(&philos->status.mu, &philos->error);
 		i = 0;
 		while (i < philos->count)
 		{
 			philo = &philos->array[i];
 			philo_fill_params(philo, all);
 			philo->id = i + 1;
+			philo->status = &philos->status;
 			f_mutex_init(&philo->forks.left, &philo->error);
 			neighbour = philo_get_neighbour(philo->id, philos);
 			if (neighbour)
