@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 18:09:51 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 13:25:52 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 17:33:25 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,16 @@ static void	philo_cycle(t_philo *philo)
 
 void	*philo_job(void *phil)
 {
-	t_philo	*philo;
+	t_philo		*philo;
+	pthread_t	monitor_tid;
 
 	philo = phil;
+	pthread_create(&monitor_tid, NULL, monitor_mealtime, philo);
 	while (!philo_should_stop(philo))
 		philo_cycle(philo);
 	philo_replace_forks(philo);
 	if (philo->error)
 		philo_update_status(philo, error_occured);
+	pthread_join(monitor_tid, NULL);
 	return (NULL);
 }
