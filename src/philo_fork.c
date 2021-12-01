@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 13:11:06 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 13:14:27 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 13:21:05 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,14 @@ void	philo_pick_a_fork(t_philo *philo)
 
 void	philo_replace_forks(t_philo *philo)
 {
-	f_mu_unlock(&philo->forks.left, &philo->error);
-	philo->forks.left_taken = 0;
-	if (philo->forks.right)
+	if (philo->forks.left_taken)
 	{
-		f_mu_unlock(philo->forks.right, &philo->error);
+		pthread_mutex_unlock(&philo->forks.left);
+		philo->forks.left_taken = 0;
+	}
+	if (philo->forks.right_taken)
+	{
+		pthread_mutex_unlock(philo->forks.right);
 		philo->forks.right_taken = 0;
 	}
 }
