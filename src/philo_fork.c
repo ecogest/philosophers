@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 13:11:06 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 10:25:14 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 13:14:27 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,16 @@ void	philo_pick_a_fork(t_philo *philo)
 	else
 		fork = philo->forks.right;
 	if (fork)
+	{
 		f_mu_lock(fork, &philo->error);
+		if (!philo->error)
+		{
+			if (philo->activity.type == taking_lfork)
+				philo->forks.left_taken = 1;
+			else
+				philo->forks.right_taken = 1;
+		}
+	}
 	else
 		f_puterr_safe("Missing fork.", &philo->mu_output->stderr);
 }
@@ -54,6 +63,10 @@ void	philo_pick_a_fork(t_philo *philo)
 void	philo_replace_forks(t_philo *philo)
 {
 	f_mu_unlock(&philo->forks.left, &philo->error);
+	philo->forks.left_taken = 0;
 	if (philo->forks.right)
+	{
 		f_mu_unlock(philo->forks.right, &philo->error);
+		philo->forks.right_taken = 0;
+	}
 }

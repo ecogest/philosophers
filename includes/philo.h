@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 11:02:13 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 13:10:50 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ typedef struct s_philo_param
 
 typedef struct s_forks
 {
+	bool			left_taken;
+	bool			right_taken;
 	pthread_mutex_t	left;
 	pthread_mutex_t	*right;
 }					t_forks;
