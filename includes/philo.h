@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 16:42:34 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 13:10:50 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,23 @@ typedef enum e_action
 	died
 }	t_action;
 
+typedef enum e_status_update
+{
+	sated,
+	dead,
+	error_occured
+}	t_status_update;
+
 /*
 ** =============================== Structures =============================== **
 */
 
-typedef struct s_action_display
+typedef struct s_action_fmt
 {
 	t_action	action;
 	const char	*color;
 	const char	*stract;
-}				t_act_d;
+}				t_fmt;
 
 typedef struct s_philo_param
 {
@@ -67,30 +74,27 @@ typedef struct s_philo_param
 
 typedef struct s_forks
 {
+	bool			left_taken;
+	bool			right_taken;
 	pthread_mutex_t	left;
 	pthread_mutex_t	*right;
 }					t_forks;
 
 typedef struct s_activity
 {
+	t_action	type;
 	uint		start;
 	uint		delta_time;
-	t_action	type;
+	uint		last_mealtime;
 }				t_activity;
 
-typedef struct s_mutex_root
+// TODO: remove start if not needed
+typedef struct s_mutex_output
 {
 	pthread_mutex_t	stdout;
 	pthread_mutex_t	stderr;
 	pthread_mutex_t	start;
-}					t_mutex_root;
-
-typedef enum e_status_update
-{
-	sated,
-	dead,
-	error_occured
-}	t_status_update;
+}					t_mutex_output;
 
 typedef struct s_philos_status
 {
@@ -109,7 +113,7 @@ typedef struct s_philo
 	t_activity		activity;
 	int				meal_count;
 	t_forks			forks;
-	t_mutex_root	*mu;
+	t_mutex_output	*mu_output;
 	t_error			error;
 }					t_philo;
 
@@ -124,7 +128,7 @@ typedef struct s_philos
 typedef struct s_root
 {
 	t_philo_param	philo_param;
-	t_mutex_root	mu;
+	t_mutex_output	mu_output;
 	t_philos		philos;
 	t_error			error;
 }					t_root;
@@ -141,9 +145,11 @@ void	philos_init(t_philos *philos, t_root *all);
 
 // job functions
 void	*philo_job(void *phil);
-void	philo_get_time(t_philo *philo);
+void	philo_do(t_philo *philo, t_action action);
+void	philo_timestamp_start(t_philo *philo);
 void	philo_print_action(t_philo *philo);
-void	philo_take_fork(t_philo *philo);
+void	philo_take_forks(t_philo *philo);
+void	philo_pick_a_fork(t_philo *philo);
 void	philo_replace_forks(t_philo *philo);
 bool	philo_should_stop(t_philo *philo);
 
@@ -153,7 +159,6 @@ void	philo_update_status(t_philo *philo, t_status_update update);
 
 // action params
 int		action_get_duration(t_action action, t_philo_param *param);
-t_act_d	action_get_display(t_action action);
 
 // Syscall wrapped
 void	*f_calloc(size_t block_size, size_t count, t_error *error);
@@ -164,10 +169,12 @@ void	f_thread(t_philo *philo, void *(*job)(void *), t_error *error);
 void	f_ms_sleep(int millisec);
 
 // Misc utils
+uint	f_timestamp_get(struct timeval *tv_start);
 uint	f_tv_to_timestamp(struct timeval *now, struct timeval *start);
 
 // Printing messages
 void	f_puterr(const char *s);
+void	f_puterr_safe(const char *s, pthread_mutex_t *mu_stderr);
 void	f_put_usage(void);
 
 // Cleanup functions
