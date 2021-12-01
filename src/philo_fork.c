@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 13:11:06 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 18:32:34 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 18:59:35 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	philo_take_forks(t_philo *philo)
 	}
 }
 
-// TODO: die if fork == NULL
 void	philo_pick_a_fork(t_philo *philo)
 {
 	pthread_mutex_t	*fork;

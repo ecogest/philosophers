@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 18:10:23 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 19:07:06 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct s_philos_state
 	_Atomic volatile int		hungry_philosphers;
 	_Atomic volatile int		dead_philosophers;
 	_Atomic volatile t_error	error;
+	pthread_mutex_t				mu_check_death;
 }								t_philos_state;
 
 typedef struct s_philo
