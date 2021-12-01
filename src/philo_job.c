@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 18:09:51 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 12:10:49 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 12:13:07 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,17 @@ void	philo_finished_eating(t_philo *philo)
 		philo_update_status(philo, sated);
 }
 
-void	philo_do(t_philo *philo, t_action action)
+void	philo_wait_for_action_to_finish(t_philo *philo, t_action action)
 {
 	int	duration;
 
+	duration = action_get_duration(action, philo->param);
+	if (duration)
+		f_ms_sleep(duration);
+}
+
+void	philo_do(t_philo *philo, t_action action)
+{
 	if (philo_should_stop(philo))
 		return ;
 	philo->activity.type = action;
@@ -40,9 +47,7 @@ void	philo_do(t_philo *philo, t_action action)
 		philo_pick_a_fork(philo);
 	philo_timestamp_start(philo);
 	philo_print_action(philo);
-	duration = action_get_duration(action, philo->param);
-	if (duration)
-		f_ms_sleep(duration);
+	philo_wait_for_action_to_finish(philo, action);
 	if (action == eating)
 		philo_finished_eating(philo);
 }
