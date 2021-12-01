@@ -64,6 +64,13 @@ fclean: clean libft
 
 re: fclean all libft
 
+fclean-nolibft:
+	@printf "$(MAGENTA)Cleaning objects.\n$(NC)"
+	@rm -rf $(OBJDIR)
+	@printf "$(MAGENTA)Removing binary: $(BOLD)%s\n$(NC)" $(NAME)
+	@rm -f $(NAME) $(NAME_TEST)
+r: fclean-nolibft all
+
 #  ============================= COMPILE TESTS ==============================  #
 
 NAME_TEST = UnitTests
