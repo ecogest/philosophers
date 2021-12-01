@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 12:24:29 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 12:08:18 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 17:47:14 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	main_philo(int ac, const char **av)
 		philos_create_threads(&root.philos);
 		philos_wait(&root.philos);
 	}
-	if (root.error || root.philos.error || root.philos.status.error)
+	if (root.error || root.philos.error || root.philos.philos_state.error)
 		root.error = EXIT_FAILURE;
 	root_cleanup(&root);
 	return (root.error);

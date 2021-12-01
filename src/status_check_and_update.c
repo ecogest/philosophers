@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 16:41:39 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 15:18:14 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 17:47:02 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** @brief Stops if error, 0 hungry philosophers or one dead
 */
 
-bool	status_should_stop(t_philos_status *status)
+bool	status_should_stop(t_philos_state *status)
 {
 	bool	ret;
 	int		err;
@@ -45,18 +45,18 @@ bool	philo_should_stop(t_philo *philo)
 {
 	if (philo->error)
 	{
-		status_update(philo->status, error_occured);
+		status_update(philo->philos_state, error_occured);
 		return (true);
 	}
 	else
-		return (status_should_stop(philo->status));
+		return (status_should_stop(philo->philos_state));
 }
 
 /*
 ** events: error_occured, sated, dead
 */
 
-void	status_update(t_philos_status *status, t_status_update update)
+void	status_update(t_philos_state *status, t_status_update update)
 {
 	t_error	err;
 
@@ -75,5 +75,5 @@ void	status_update(t_philos_status *status, t_status_update update)
 
 void	philo_update_status(t_philo *philo, t_status_update update)
 {
-	status_update(philo->status, update);
+	status_update(philo->philos_state, update);
 }

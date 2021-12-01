@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 14:34:14 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 17:31:38 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 17:46:39 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,23 @@ void	monitor_update_status(t_philo *philo, t_status_update update)
 	err = 0;
 	if (update == dead)
 	{
-		err = pthread_mutex_lock(&philo->status->mu);
+		err = pthread_mutex_lock(&philo->philos_state->mu);
 		if (!err)
 		{
-			philo->status->dead_philosophers++;
-			pthread_mutex_unlock(&philo->status->mu);
+			philo->philos_state->dead_philosophers++;
+			pthread_mutex_unlock(&philo->philos_state->mu);
 		}
 	}
 }
 
-void	*monitor_mealtime(void	*phil)
+void	*monitor_mealtime(void *phil)
 {
 	t_philo	*philo;
 	uint	last_mealtime;
 	uint	current_time;
 
 	philo = phil;
-	while (!status_should_stop(philo->status))
+	while (!status_should_stop(philo->philos_state))
 	{
 		usleep(100);
 		last_mealtime = monitor_get_lastmealtime(philo);

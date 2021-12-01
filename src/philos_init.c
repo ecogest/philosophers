@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:25:47 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 17:38:25 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 17:47:14 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ static t_philo	*philo_get_neighbour(int philo_id, t_philos *philos)
 void	philos_status_init(t_philos *philos, t_root *root)
 {
 	if (root->philo_param.max_meal != -1)
-		philos->status.hungry_philosphers = philos->count;
+		philos->philos_state.hungry_philosphers = philos->count;
 	else
-		philos->status.hungry_philosphers = -1;
-	f_mutex_init(&philos->status.mu, &philos->error);
+		philos->philos_state.hungry_philosphers = -1;
+	f_mutex_init(&philos->philos_state.mu, &philos->error);
 }
 
 /*
@@ -69,7 +69,7 @@ void	philos_init(t_philos *philos, t_root *all)
 			philo = &philos->array[i];
 			philo_fill_params(philo, all);
 			philo->id = i + 1;
-			philo->status = &philos->status;
+			philo->philos_state = &philos->philos_state;
 			f_mutex_init(&philo->forks.left, &philo->error);
 			neighbour = philo_get_neighbour(philo->id, philos);
 			if (neighbour)

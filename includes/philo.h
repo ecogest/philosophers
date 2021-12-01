@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 17:33:09 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 17:47:13 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,20 +95,20 @@ typedef struct s_mutex_output
 	pthread_mutex_t	start;
 }					t_mutex_output;
 
-typedef struct s_philos_status
+typedef struct s_philos_state
 {
 	int				hungry_philosphers;
 	int				dead_philosophers;
 	t_error			error;
 	pthread_mutex_t	mu;
-}					t_philos_status;
+}					t_philos_state;
 
 typedef struct s_philo
 {
 	int				id;
 	pthread_t		tid;
 	t_philo_param	*param;
-	t_philos_status	*status;
+	t_philos_state	*philos_state;
 	t_activity		activity;
 	int				meal_count;
 	t_forks			forks;
@@ -119,8 +119,8 @@ typedef struct s_philo
 typedef struct s_philos
 {
 	int				count;
+	t_philos_state	philos_state;
 	t_philo			*array;
-	t_philos_status	status;
 	t_error			error;
 }			t_philos;
 
@@ -153,9 +153,9 @@ void	philo_replace_forks(t_philo *philo);
 bool	philo_should_stop(t_philo *philo);
 
 // status checking
-bool	status_should_stop(t_philos_status *status);
+bool	status_should_stop(t_philos_state *status);
 bool	philo_should_stop(t_philo *philo);
-void	status_update(t_philos_status *status, t_status_update update);
+void	status_update(t_philos_state *status, t_status_update update);
 void	philo_update_status(t_philo *philo, t_status_update update);
 
 // monitor
