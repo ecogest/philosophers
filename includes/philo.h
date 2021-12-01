@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 10:23:36 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 10:35:45 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,7 @@ void	f_thread(t_philo *philo, void *(*job)(void *), t_error *error);
 void	f_ms_sleep(int millisec);
 
 // Misc utils
+uint	f_timestamp_get(struct timeval *tv_start);
 uint	f_tv_to_timestamp(struct timeval *now, struct timeval *start);
 
 // Printing messages

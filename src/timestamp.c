@@ -1,16 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tv_to_timestamp.c                                  :+:      :+:    :+:   */
+/*   timestamp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 11:41:17 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 11:44:37 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 10:35:38 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+uint	f_timestamp_get(struct timeval *tv_start)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (f_tv_to_timestamp(&tv, tv_start));
+}
 
 uint	f_tv_to_timestamp(struct timeval *now, struct timeval *start)
 {
