@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:25:47 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 17:47:14 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 17:56:56 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	philos_status_init(t_philos *philos, t_root *root)
 		philos->philos_state.hungry_philosphers = philos->count;
 	else
 		philos->philos_state.hungry_philosphers = -1;
-	f_mutex_init(&philos->philos_state.mu, &philos->error);
 }
 
 /*

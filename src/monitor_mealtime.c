@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 14:34:14 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 17:46:39 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 17:48:55 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,8 @@ uint	monitor_get_lastmealtime(t_philo *philo)
 
 void	monitor_update_status(t_philo *philo, t_status_update update)
 {
-	t_error	err;
-
-	err = 0;
 	if (update == dead)
-	{
-		err = pthread_mutex_lock(&philo->philos_state->mu);
-		if (!err)
-		{
 			philo->philos_state->dead_philosophers++;
-			pthread_mutex_unlock(&philo->philos_state->mu);
-		}
-	}
 }
 
 void	*monitor_mealtime(void *phil)

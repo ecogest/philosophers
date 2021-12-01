@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 17:47:13 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 17:58:34 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,16 +92,14 @@ typedef struct s_mutex_output
 {
 	pthread_mutex_t	stdout;
 	pthread_mutex_t	stderr;
-	pthread_mutex_t	start;
 }					t_mutex_output;
 
 typedef struct s_philos_state
 {
-	int				hungry_philosphers;
-	int				dead_philosophers;
-	t_error			error;
-	pthread_mutex_t	mu;
-}					t_philos_state;
+	_Atomic volatile int		hungry_philosphers;
+	_Atomic volatile int		dead_philosophers;
+	_Atomic volatile t_error	error;
+}								t_philos_state;
 
 typedef struct s_philo
 {
