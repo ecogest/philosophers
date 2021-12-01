@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 10:39:49 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 11:01:09 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 18:09:06 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,24 @@ static int	print_action_safe(uint start, int id, t_fmt *fmt, \
 	return (err);
 }
 
-void	philo_print_action(t_philo *philo)
+int	print_action(uint timestamp, int id, t_action action, \
+		pthread_mutex_t *mu_stdout)
 {
 	t_fmt	fmt;
 	int		err;
 
+	fmt = action_get_format(action);
+	err = print_action_safe(timestamp, id, &fmt, mu_stdout);
+	return (err);
+}
+
+void	philo_print_action(t_philo *philo)
+{
+	int		err;
+
 	if (philo->error)
 		return ;
-	fmt = action_get_format(philo->activity.type);
-	err = print_action_safe(philo->activity.start, philo->id, &fmt, \
+	err = print_action(philo->activity.start, philo->id, philo->activity.type, \
 			&philo->mu_output->stdout);
 	if (err)
 		philo->error = err;
