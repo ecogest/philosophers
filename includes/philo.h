@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/30 17:41:08 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 10:23:36 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ uint	f_tv_to_timestamp(struct timeval *now, struct timeval *start);
 
 // Printing messages
 void	f_puterr(const char *s);
+void	f_puterr_safe(const char *s, pthread_mutex_t *mu_stderr);
 void	f_put_usage(void);
 
 // Cleanup functions
