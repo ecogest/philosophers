@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 15:14:41 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 17:33:09 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,10 @@ typedef struct s_forks
 
 typedef struct s_activity
 {
-	t_action	type;
-	uint		start;
-	uint		delta_time;
-	uint		last_mealtime;
-}				t_activity;
+	t_action				type;
+	uint					start;
+	_Atomic volatile uint	last_mealtime;
+}							t_activity;
 
 // TODO: remove start if not needed
 typedef struct s_mutex_output
@@ -158,6 +157,9 @@ bool	status_should_stop(t_philos_status *status);
 bool	philo_should_stop(t_philo *philo);
 void	status_update(t_philos_status *status, t_status_update update);
 void	philo_update_status(t_philo *philo, t_status_update update);
+
+// monitor
+void	*monitor_mealtime(void	*phil);
 
 // action params
 int		action_get_duration(t_action action, t_philo_param *param);
