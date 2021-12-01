@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 13:11:06 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 14:08:39 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 18:32:34 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ void	philo_take_forks(t_philo *philo)
 {
 	if (philo->error)
 		return ;
-	if (philo->id % 2)
+	if (!philo->forks.right)
+		philo_do(philo, taking_lfork);
+	else if (philo->id % 2)
 	{
 		philo_do(philo, taking_rfork);
 		philo_do(philo, taking_lfork);

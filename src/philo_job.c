@@ -6,18 +6,29 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 18:09:51 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 17:33:25 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 18:41:07 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+static void	wait_until_starvation(t_philo *philo)
+{
+	while (!philo_should_stop(philo))
+		usleep(10);
+}
+
 static void	philo_cycle(t_philo *philo)
 {
 	philo_take_forks(philo);
-	philo_do(philo, eating);
-	philo_do(philo, sleeping);
-	philo_do(philo, thinking);
+	if (philo->forks.right_taken)
+	{
+		philo_do(philo, eating);
+		philo_do(philo, sleeping);
+		philo_do(philo, thinking);
+	}
+	else
+		wait_until_starvation(philo);
 }
 
 void	*philo_job(void *phil)
