@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 10:35:45 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 11:02:13 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ typedef enum e_status_update
 ** =============================== Structures =============================== **
 */
 
-typedef struct s_action_display
+typedef struct s_action_fmt
 {
 	t_action	action;
 	const char	*color;
 	const char	*stract;
-}				t_act_d;
+}				t_fmt;
 
 typedef struct s_philo_param
 {
@@ -144,7 +144,7 @@ void	philos_init(t_philos *philos, t_root *all);
 // job functions
 void	*philo_job(void *phil);
 void	philo_do(t_philo *philo, t_action action);
-void	philo_activity_start(t_philo *philo);
+void	philo_timestamp_start(t_philo *philo);
 void	philo_print_action(t_philo *philo);
 void	philo_take_forks(t_philo *philo);
 void	philo_pick_a_fork(t_philo *philo);
@@ -157,7 +157,6 @@ void	philo_update_status(t_philo *philo, t_status_update update);
 
 // action params
 int		action_get_duration(t_action action, t_philo_param *param);
-t_act_d	action_get_display(t_action action);
 
 // Syscall wrapped
 void	*f_calloc(size_t block_size, size_t count, t_error *error);

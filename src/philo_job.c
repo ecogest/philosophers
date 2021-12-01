@@ -6,13 +6,13 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 18:09:51 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 10:36:08 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 10:39:15 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	philo_activity_start(t_philo *philo)
+void	philo_timestamp_start(t_philo *philo)
 {
 	if (philo->error)
 		return ;
@@ -30,7 +30,7 @@ void	philo_do(t_philo *philo, t_action action)
 	philo->activity.type = action;
 	if (action == taking_lfork || action == taking_rfork)
 		philo_pick_a_fork(philo);
-	philo_activity_start(philo);
+	philo_timestamp_start(philo);
 	philo_print_action(philo);
 	duration = action_get_duration(action, philo->param);
 	if (duration)
