@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:22 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 13:17:44 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 13:52:01 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	philo_do(t_philo *philo, t_action action)
 	philo->activity.type = action;
 	if (action == taking_lfork || action == taking_rfork)
 		philo_pick_a_fork(philo);
+	if (philo_should_stop(philo))
+		return ;
 	philo_timestamp_start(philo);
 	philo_print_action(philo);
 	philo_wait_for_action_to_finish(philo, action);
