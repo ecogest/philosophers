@@ -50,12 +50,6 @@ static void	philo_cycle(t_philo *philo)
 	philo_do(philo, thinking);
 }
 
-/* static void	philo_wait_for_start(t_philo *philo) */
-/* { */
-/* 	f_mu_lock(&philo->mu_output->start, &philo->error); */
-/* 	f_mu_unlock(&philo->mu_output->start, &philo->error); */
-/* } */
-
 void	*philo_job(void *phil)
 {
 	t_philo	*philo;
