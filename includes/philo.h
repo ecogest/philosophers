@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 13:10:50 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 15:14:41 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,9 @@ void	philo_replace_forks(t_philo *philo);
 bool	philo_should_stop(t_philo *philo);
 
 // status checking
+bool	status_should_stop(t_philos_status *status);
 bool	philo_should_stop(t_philo *philo);
+void	status_update(t_philos_status *status, t_status_update update);
 void	philo_update_status(t_philo *philo, t_status_update update);
 
 // action params

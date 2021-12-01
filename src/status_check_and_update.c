@@ -6,37 +6,74 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 16:41:39 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 13:27:12 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/01 15:18:14 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-bool	philo_should_stop(t_philo *philo)
+/*
+** @brief Stops if error, 0 hungry philosophers or one dead
+*/
+
+bool	status_should_stop(t_philos_status *status)
 {
 	bool	ret;
+	int		err;
 
-	if (philo->error)
-		return (true);
-	f_mu_lock(&philo->status->mu, &philo->error);
-	if (philo->status->hungry_philosphers == 0)
-		ret = true;
-	else if (philo->status->dead_philosophers)
-		ret = true;
+	err = pthread_mutex_lock(&status->mu);
+	if (!err)
+	{
+		if (status->hungry_philosphers == 0)
+			ret = true;
+		else if (status->dead_philosophers)
+			ret = true;
+		else
+			ret = false;
+		pthread_mutex_unlock(&status->mu);
+		return (ret);
+	}
 	else
-		ret = false;
-	f_mu_unlock(&philo->status->mu, &philo->error);
-	return (ret);
+		return (true);
+}
+
+/*
+** If philo->error or if status_should_stop
+*/
+
+bool	philo_should_stop(t_philo *philo)
+{
+	if (philo->error)
+	{
+		status_update(philo->status, error_occured);
+		return (true);
+	}
+	else
+		return (status_should_stop(philo->status));
+}
+
+/*
+** events: error_occured, sated, dead
+*/
+
+void	status_update(t_philos_status *status, t_status_update update)
+{
+	t_error	err;
+
+	err = pthread_mutex_lock(&status->mu);
+	if (!err)
+	{
+		if (update == error_occured)
+			status->error = error;
+		else if (update == sated && status->hungry_philosphers > 0)
+			status->hungry_philosphers--;
+		else if (update == dead)
+			status->dead_philosophers++;
+		pthread_mutex_unlock(&status->mu);
+	}
 }
 
 void	philo_update_status(t_philo *philo, t_status_update update)
 {
-	f_mu_lock(&philo->status->mu, &philo->error);
-	if (philo->error)
-		philo->status->error = philo->error;
-	else if (update == sated && philo->status->hungry_philosphers > 0)
-		philo->status->hungry_philosphers--;
-	else if (update == dead)
-		philo->status->dead_philosophers++;
-	f_mu_unlock(&philo->status->mu, &philo->error);
+	status_update(philo->status, update);
 }
