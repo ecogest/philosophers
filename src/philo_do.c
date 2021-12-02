@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:22 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/02 11:42:16 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/02 12:42:36 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	philo_wait_for_action_to_finish(t_philo *philo, t_action action)
 	else if (action == thinking)
 	{
 		ms_start = philo->activity.last_mealtime;
-		if (philo->param->tt_die > 2)
-			ms_duration = philo->param->tt_die - 2;
+		if (philo->param->tt_die > 10)
+			ms_duration = philo->param->tt_die - 10;
 	}
 	if (ms_duration)
 		philo_ms_sleep(philo, ms_start, ms_duration);
@@ -64,10 +64,7 @@ void	philo_do(t_philo *philo, t_action action)
 	philo->activity.type = action;
 	if (action == taking_lfork || action == taking_rfork)
 		philo_pick_a_fork(philo);
-	if (philo_should_stop(philo))
-		return ;
-	philo_timestamp_start(philo);
-	philo_print_action(philo);
+	philo_put_action(philo);
 	philo_wait_for_action_to_finish(philo, action);
 	if (action == eating)
 		philo_finished_eating(philo);
