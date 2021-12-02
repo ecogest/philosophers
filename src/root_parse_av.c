@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:58:20 by mjacq             #+#    #+#             */
-/*   Updated: 2021/11/29 14:03:25 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/02 17:09:33 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,12 @@ static void
 ** - count of philos is strictly positive
 **
 ** max meal: -1 if not specified
+**
+** To debug parsing, use:
+**		printf("philos: %d\nttd: %d\ntte: %d\ntts:%d\nmax meals: %d\n", \
+**				root->philos.count, \
+**				root->philo_param.tt_die, root->philo_param.tt_eat, \
+**				root->philo_param.tt_sleep, root->philo_param.max_meal);
 */
 
 void	root_parse_av(t_root *root, int ac, const char **av)
@@ -77,10 +83,6 @@ void	root_parse_av(t_root *root, int ac, const char **av)
 		root->philo_param.tt_sleep = ft_atoi(av[4]);
 		if (ac == 6)
 			root->philo_param.max_meal = ft_atoi(av[5]);
-		printf("philos: %d\nttd: %d\ntte: %d\ntts:%d\nmax meals: %d\n", \
-				root->philos.count, \
-				root->philo_param.tt_die, root->philo_param.tt_eat, \
-				root->philo_param.tt_sleep, root->philo_param.max_meal);
 	}
 	else
 	{
