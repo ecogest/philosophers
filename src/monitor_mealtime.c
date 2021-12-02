@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 14:34:14 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/02 11:47:59 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/02 12:00:28 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	monitor_trigger_death(t_philo *philo, uint curr_time)
 	if (philo->philos_state->dead_philosophers == 1)
 	{
 		pthread_mutex_unlock(&philo->philos_state->mu_check_death);
-		print_action(curr_time, philo->id, died, &philo->mu_output->stdout);
+		mu_print_action(curr_time, philo->id, died, &philo->mu_output->stdout);
 	}
 }
 

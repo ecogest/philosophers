@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 10:39:49 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 18:09:06 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/02 12:00:44 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,16 @@ static t_fmt	action_get_format(t_action action)
 	return (actions[i]);
 }
 
-static int	print_action_safe(uint start, int id, t_fmt *fmt, \
+void	print_action(uint timestamp, int id, t_action action)
+{
+	t_fmt	fmt;
+
+	fmt = action_get_format(action);
+	printf("\e[38m%u\e[0m \e[1m%d\e[0m %s%s\e[0m\n", \
+			timestamp, id, fmt.color, fmt.stract);
+}
+
+int	mu_print_action(uint timestamp, int id, t_action action, \
 		pthread_mutex_t *mu_stdout)
 {
 	int		err;
@@ -38,21 +47,9 @@ static int	print_action_safe(uint start, int id, t_fmt *fmt, \
 	err = pthread_mutex_lock(mu_stdout);
 	if (!err)
 	{
-		printf("\e[38m%u\e[0m \e[1m%d\e[0m %s%s\e[0m\n", \
-				start, id, fmt->color, fmt->stract);
+		print_action(timestamp, id, action);
 		err = pthread_mutex_unlock(mu_stdout);
 	}
-	return (err);
-}
-
-int	print_action(uint timestamp, int id, t_action action, \
-		pthread_mutex_t *mu_stdout)
-{
-	t_fmt	fmt;
-	int		err;
-
-	fmt = action_get_format(action);
-	err = print_action_safe(timestamp, id, &fmt, mu_stdout);
 	return (err);
 }
 
@@ -62,8 +59,8 @@ void	philo_print_action(t_philo *philo)
 
 	if (philo->error)
 		return ;
-	err = print_action(philo->activity.start, philo->id, philo->activity.type, \
-			&philo->mu_output->stdout);
+	err = mu_print_action(philo->activity.start, philo->id, \
+			philo->activity.type, &philo->mu_output->stdout);
 	if (err)
 		philo->error = err;
 }

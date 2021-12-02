@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/02 11:43:47 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/02 12:00:28 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,8 @@ void	philo_replace_forks(t_philo *philo);
 bool	philo_should_stop(t_philo *philo);
 
 // Printing actions
-int		print_action(uint timestamp, int id, t_action action, \
+void	print_action(uint timestamp, int id, t_action action);
+int		mu_print_action(uint timestamp, int id, t_action action, \
 		pthread_mutex_t *mu_stdout);
 void	philo_print_action(t_philo *philo);
 
