@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:58:20 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/02 17:09:33 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/02 18:04:25 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void
 	if (!has_enough_args(ac))
 		*strerr = "Wrong number of arguments.";
 	else if (!all_args_positive_integers(av))
-		*strerr = "Arguments should be positive integers.";
+		*strerr = "Arguments should be positive integers (below INT_MAX).";
 	else if (!philo_count_strictly_positive(av[1]))
 		*strerr = "The number of philosophers should be strictly positive.";
 	else
