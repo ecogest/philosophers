@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 10:39:49 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/02 13:15:01 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/02 17:14:21 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,12 @@ void	put_action(uint timestamp, int id, t_action action)
 	t_fmt	fmt;
 
 	fmt = action_get_format(action);
-	printf("\e[38m%u\e[0m \e[1m%d\e[0m %s%s\e[0m\n", \
-			timestamp, id, fmt.color, fmt.stract);
+	if (COLOR)
+		printf("\e[38m%u\e[0m \e[1m%d\e[0m %s%s\e[0m\n", \
+				timestamp, id, fmt.color, fmt.stract);
+	else
+		printf("%u %d %s\n", \
+				timestamp, id, fmt.stract);
 }
 
 int	mu_put_action(uint timestamp, int id, t_action action, \
