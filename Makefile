@@ -9,14 +9,8 @@ all: $(NAME)
 CC        = clang
 CXX       = clang++
 CPPFLAGS  = -Iincludes
-CPPFLAGS += -Ilibft/includes
 CFLAGS    = -Wall -Werror -Wextra
-CFLAGS   += -g
-LDFLAGS   = -Llibft -lft -lpthread
-# CFLAGS   += -fsanitize=address
-# LDFLAGS  += -lasan
-# CFLAGS   += -fsanitize=thread
-# LDFLAGS  += -ltsan
+LDFLAGS   = -lpthread
 
 #  ========================== SOURCES AND OBJECTS ===========================  #
 
@@ -31,17 +25,9 @@ OBJS = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 
 #  ============================ LINK EXECUTABLE =============================  #
 
-$(NAME): libft/libft.a $(OBJDIR) $(OBJS) $(MAIN_OBJ)
+$(NAME): $(OBJDIR) $(OBJS) $(MAIN_OBJ)
 	@$(CC) $(OBJS) $(MAIN_OBJ) $(LDFLAGS) -o $@
 	@printf "✨ $(BOLD)$(GREEN)%s$(NC)$(GREEN) has been successfully linked.\n$(NC)" $@
-
-#  ============================== COMPILE LIBS ==============================  #
-
-libft/libft.a: libft
-libft:
-	@$(MAKE) --silent -C libft $(filter $(MAKECMDGOALS),clean fclean re)
-
-# TODO: if lib needed, add it to all, clean, fclean, and .PHONY's dependencies.
 
 #  ============================ COMPILE OBJECTS =============================  #
 
@@ -54,27 +40,19 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 
 # ================================= CLEANING ================================= #
 
-clean: libft
+clean:
 	@printf "$(MAGENTA)Cleaning objects.\n$(NC)"
 	@rm -rf $(OBJDIR)
 
-fclean: clean libft
+fclean: clean
 	@printf "$(MAGENTA)Removing binary: $(BOLD)%s\n$(NC)" $(NAME)
 	@rm -f $(NAME) $(NAME_TEST)
 
-re: fclean all libft
-
-fclean-nolibft:
-	@printf "$(MAGENTA)Cleaning objects.\n$(NC)"
-	@rm -rf $(OBJDIR)
-	@printf "$(MAGENTA)Removing binary: $(BOLD)%s\n$(NC)" $(NAME)
-	@rm -f $(NAME) $(NAME_TEST)
-
-r: fclean-nolibft all
+re: fclean all
 
 #  ================================= .PHONY =================================  #
 
-.PHONY: all link clean fclean re libft test googletest
+.PHONY: all link clean fclean re
 
 #  ================================= COLORS =================================  #
 
