@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:22 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/02 12:42:36 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/02 13:25:18 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,16 @@ void	philo_ms_sleep(t_philo *philo, uint ms_start, uint ms_duration)
 		usleep(mus_refresh_interval);
 }
 
+/*
+** Idea: could set a duration for thinking as well
+**	else if (action == thinking)
+**	{
+**		ms_start = philo->activity.last_mealtime;
+**		if (philo->param->tt_die > 10)
+**			ms_duration = philo->param->tt_die - 10;
+**	}
+*/
+
 void	philo_wait_for_action_to_finish(t_philo *philo, t_action action)
 {
 	int	ms_duration;
@@ -48,12 +58,6 @@ void	philo_wait_for_action_to_finish(t_philo *philo, t_action action)
 	{
 		ms_start = philo->activity.start;
 		ms_duration = action_get_ms_duration(action, philo->param);
-	}
-	else if (action == thinking)
-	{
-		ms_start = philo->activity.last_mealtime;
-		if (philo->param->tt_die > 10)
-			ms_duration = philo->param->tt_die - 10;
 	}
 	if (ms_duration)
 		philo_ms_sleep(philo, ms_start, ms_duration);
