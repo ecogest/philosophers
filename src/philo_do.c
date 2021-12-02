@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:22 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/02 10:50:21 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/02 11:42:16 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	philo_timestamp_start(t_philo *philo)
 {
 	if (philo->error)
 		return ;
-	philo->activity.start = f_timestamp_get(&philo->param->tv_start);
+	philo->activity.start = f_timestamp_get();
 	if (philo->activity.type == eating)
 		philo->activity.last_mealtime = philo->activity.start;
 }
@@ -31,10 +31,10 @@ void	philo_finished_eating(t_philo *philo)
 
 void	philo_ms_sleep(t_philo *philo, uint ms_start, uint ms_duration)
 {
-	const uint	mus_refresh_interval = 10;
+	static const uint	mus_refresh_interval = 10;
 
 	while (!philo_should_stop(philo) && \
-			f_timestamp_get(&philo->param->tv_start) < ms_start + ms_duration)
+			f_timestamp_get() < ms_start + ms_duration)
 		usleep(mus_refresh_interval);
 }
 

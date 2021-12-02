@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/02 10:30:43 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/02 11:43:47 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ typedef struct s_philo_param
 	int				tt_eat;
 	int				tt_sleep;
 	int				max_meal;
-	struct timeval	tv_start;
 }					t_philo_param;
 
 typedef struct s_forks
@@ -176,8 +175,7 @@ void	f_thread(t_philo *philo, void *(*job)(void *), t_error *error);
 void	f_ms_sleep(int millisec);
 
 // Misc utils
-uint	f_timestamp_get(struct timeval *tv_start);
-uint	f_tv_to_timestamp(struct timeval *now, struct timeval *start);
+uint	f_timestamp_get(void);
 
 // Printing messages
 void	f_puterr(const char *s);
