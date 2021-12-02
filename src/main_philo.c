@@ -6,34 +6,34 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 12:24:29 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/02 11:39:18 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/02 19:03:38 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/* void	philos_lock_start(t_philos *philos, pthread_mutex_t *mu_start) */
-/* { */
-/* 	if (philos->error) */
-/* 		return ; */
-/* 	f_mu_lock(mu_start, &philos->error); */
-/* } */
-
 void	philos_create_threads(t_philos *philos)
 {
-	t_philo	*philo;
-	int		i;
+	static int	half_created;
+	static int	i;
+	t_philo		*philo;
 
 	if (philos->error)
 		return ;
-	i = 0;
 	while (i < philos->count)
 	{
 		philo = &philos->array[i];
 		f_thread(philo, philo_job, &philos->error);
 		if (philos->error)
 			break ;
-		i++;
+		i += 2;
+	}
+	if (!half_created)
+	{
+		half_created = 1;
+		i = 1;
+		usleep(100);
+		philos_create_threads(philos);
 	}
 }
 
