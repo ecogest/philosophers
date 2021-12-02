@@ -16,16 +16,36 @@ LDFLAGS   = -lpthread
 
 SRCDIR  = src
 OBJDIR  = obj
-MAIN_SRC = $(SRCDIR)/main.c
-MAIN_OBJ = $(OBJDIR)/main.o
-SRCS = $(filter-out $(MAIN_SRC), $(wildcard $(SRCDIR)/*.c))
+SRCS = src/timestamp.c \
+			 src/philo_fork.c \
+			 src/cleanup.c \
+			 src/ft_atoi.c \
+			 src/ft_isnumber.c \
+			 src/f_malloc.c \
+			 src/philo_do.c \
+			 src/action_get_duration.c \
+			 src/f_mutex.c \
+			 src/ft_isint.c \
+			 src/philo_job.c \
+			 src/main.c \
+			 src/ft_strlen.c \
+			 src/main_philo.c \
+			 src/root_init.c \
+			 src/status_check_and_update.c \
+			 src/ft_putstr_fd.c \
+			 src/root_parse_av.c \
+			 src/f_thread.c \
+			 src/monitor_mealtime.c \
+			 src/put_error_and_usage.c \
+			 src/philo_print_action.c \
+			 src/hello_world.c \
+			 src/philos_init.c \
+			 src/philo_ms_sleep.c
 OBJS = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
-
-# TODO: SET SOURCES MANUALLY BEFORE SUBMIT
 
 #  ============================ LINK EXECUTABLE =============================  #
 
-$(NAME): $(OBJDIR) $(OBJS) $(MAIN_OBJ)
+$(NAME): $(OBJDIR) $(OBJS)
 	@$(CC) $(OBJS) $(MAIN_OBJ) $(LDFLAGS) -o $@
 	@printf "✨ $(BOLD)$(GREEN)%s$(NC)$(GREEN) has been successfully linked.\n$(NC)" $@
 

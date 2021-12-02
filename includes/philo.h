@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/02 18:22:06 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/02 18:31:36 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 ** ================================ Includes ================================ **
 */
 
-# include <stdint.h>
 # include <limits.h>
 # include <stdbool.h>
 # include <unistd.h>
@@ -93,7 +92,6 @@ typedef struct s_activity
 	_Atomic volatile uint	last_mealtime;
 }							t_activity;
 
-// TODO: remove start if not needed
 typedef struct s_mutex_output
 {
 	pthread_mutex_t	stdout;
