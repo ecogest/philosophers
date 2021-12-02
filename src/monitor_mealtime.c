@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 14:34:14 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/02 15:39:42 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/02 18:36:00 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,6 @@ uint	monitor_get_lastmealtime(t_philo *philo)
 	last_mealtime = philo->activity.last_mealtime;
 	return (last_mealtime);
 }
-
-/*
-** TODO: Tester sans mutex: if (++dead_philosophers == 1)
-*/
 
 void	monitor_trigger_death(t_philo *philo, uint curr_time)
 {
