@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 14:34:14 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/02 12:00:28 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/02 12:12:01 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ uint	monitor_get_lastmealtime(t_philo *philo)
 }
 
 /*
-** Tester sans mutex: if (++dead_philosophers == 1)
+** TODO: Tester sans mutex: if (++dead_philosophers == 1)
 */
 
 void	monitor_trigger_death(t_philo *philo, uint curr_time)
@@ -29,10 +29,8 @@ void	monitor_trigger_death(t_philo *philo, uint curr_time)
 	pthread_mutex_lock(&philo->philos_state->mu_check_death);
 	philo->philos_state->dead_philosophers++;
 	if (philo->philos_state->dead_philosophers == 1)
-	{
-		pthread_mutex_unlock(&philo->philos_state->mu_check_death);
 		mu_print_action(curr_time, philo->id, died, &philo->mu_output->stdout);
-	}
+	pthread_mutex_unlock(&philo->philos_state->mu_check_death);
 }
 
 void	*monitor_mealtime(void *phil)
