@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:22 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 13:52:01 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/02 10:50:21 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,34 @@ void	philo_finished_eating(t_philo *philo)
 		philo_update_status(philo, sated);
 }
 
+void	philo_ms_sleep(t_philo *philo, uint ms_start, uint ms_duration)
+{
+	const uint	mus_refresh_interval = 10;
+
+	while (!philo_should_stop(philo) && \
+			f_timestamp_get(&philo->param->tv_start) < ms_start + ms_duration)
+		usleep(mus_refresh_interval);
+}
+
 void	philo_wait_for_action_to_finish(t_philo *philo, t_action action)
 {
-	int	duration;
+	int	ms_duration;
+	int	ms_start;
 
-	duration = action_get_duration(action, philo->param);
-	if (duration)
-		f_ms_sleep(duration);
+	ms_duration = 0;
+	if (action == eating || action == sleeping)
+	{
+		ms_start = philo->activity.start;
+		ms_duration = action_get_ms_duration(action, philo->param);
+	}
+	else if (action == thinking)
+	{
+		ms_start = philo->activity.last_mealtime;
+		if (philo->param->tt_die > 2)
+			ms_duration = philo->param->tt_die - 2;
+	}
+	if (ms_duration)
+		philo_ms_sleep(philo, ms_start, ms_duration);
 }
 
 void	philo_do(t_philo *philo, t_action action)

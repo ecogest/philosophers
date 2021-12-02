@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/01 19:07:06 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/02 10:30:43 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ void	philo_update_status(t_philo *philo, t_status_update update);
 void	*monitor_mealtime(void	*phil);
 
 // action params
-int		action_get_duration(t_action action, t_philo_param *param);
+int		action_get_ms_duration(t_action action, t_philo_param *param);
 
 // Syscall wrapped
 void	*f_calloc(size_t block_size, size_t count, t_error *error);
