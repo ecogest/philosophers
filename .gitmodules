@@ -1,7 +1,0 @@
-[submodule "googletest"]
-	path = googletest
-	url = https://github.com/google/googletest.git
-	shallow = true
-[submodule "libft"]
-	path = libft
-	url = git@github.com:ecogest/libft_improved.git

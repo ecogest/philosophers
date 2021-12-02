@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/02 17:12:36 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/02 18:31:36 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@
 ** ================================ Includes ================================ **
 */
 
-# include "libft.h" // TODO: Remove libft
+# include <limits.h>
+# include <stdbool.h>
+# include <unistd.h>
+# include <stdlib.h>
 # include <stdio.h>
 # include <pthread.h>
 # include <sys/time.h>
@@ -89,7 +92,6 @@ typedef struct s_activity
 	_Atomic volatile uint	last_mealtime;
 }							t_activity;
 
-// TODO: remove start if not needed
 typedef struct s_mutex_output
 {
 	pthread_mutex_t	stdout;
@@ -189,5 +191,12 @@ void	f_put_usage(void);
 // Cleanup functions
 void	root_cleanup(t_root *all);
 void	philos_cleanup(t_philos *philos);
+
+// ft
+int		ft_isnumber(const char *str);
+int		ft_isint(const char *str);
+int		ft_atoi(const char *str);
+void	ft_putstr_fd(const char *s, int fd);
+size_t	ft_strlen(const char *str);
 
 #endif

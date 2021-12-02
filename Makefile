@@ -9,39 +9,45 @@ all: $(NAME)
 CC        = clang
 CXX       = clang++
 CPPFLAGS  = -Iincludes
-CPPFLAGS += -Ilibft/includes
 CFLAGS    = -Wall -Werror -Wextra
-CFLAGS   += -g
-LDFLAGS   = -Llibft -lft -lpthread
-# CFLAGS   += -fsanitize=address
-# LDFLAGS  += -lasan
-# CFLAGS   += -fsanitize=thread
-# LDFLAGS  += -ltsan
+LDFLAGS   = -lpthread
 
 #  ========================== SOURCES AND OBJECTS ===========================  #
 
 SRCDIR  = src
 OBJDIR  = obj
-MAIN_SRC = $(SRCDIR)/main.c
-MAIN_OBJ = $(OBJDIR)/main.o
-SRCS = $(filter-out $(MAIN_SRC), $(wildcard $(SRCDIR)/*.c))
+SRCS = src/timestamp.c \
+			 src/philo_fork.c \
+			 src/cleanup.c \
+			 src/ft_atoi.c \
+			 src/ft_isnumber.c \
+			 src/f_malloc.c \
+			 src/philo_do.c \
+			 src/action_get_duration.c \
+			 src/f_mutex.c \
+			 src/ft_isint.c \
+			 src/philo_job.c \
+			 src/main.c \
+			 src/ft_strlen.c \
+			 src/main_philo.c \
+			 src/root_init.c \
+			 src/status_check_and_update.c \
+			 src/ft_putstr_fd.c \
+			 src/root_parse_av.c \
+			 src/f_thread.c \
+			 src/monitor_mealtime.c \
+			 src/put_error_and_usage.c \
+			 src/philo_print_action.c \
+			 src/hello_world.c \
+			 src/philos_init.c \
+			 src/philo_ms_sleep.c
 OBJS = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
-
-# TODO: SET SOURCES MANUALLY BEFORE SUBMIT
 
 #  ============================ LINK EXECUTABLE =============================  #
 
-$(NAME): libft/libft.a $(OBJDIR) $(OBJS) $(MAIN_OBJ)
+$(NAME): $(OBJDIR) $(OBJS)
 	@$(CC) $(OBJS) $(MAIN_OBJ) $(LDFLAGS) -o $@
 	@printf "✨ $(BOLD)$(GREEN)%s$(NC)$(GREEN) has been successfully linked.\n$(NC)" $@
-
-#  ============================== COMPILE LIBS ==============================  #
-
-libft/libft.a: libft
-libft:
-	@$(MAKE) --silent -C libft $(filter $(MAKECMDGOALS),clean fclean re)
-
-# TODO: if lib needed, add it to all, clean, fclean, and .PHONY's dependencies.
 
 #  ============================ COMPILE OBJECTS =============================  #
 
@@ -54,66 +60,19 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 
 # ================================= CLEANING ================================= #
 
-clean: libft
+clean:
 	@printf "$(MAGENTA)Cleaning objects.\n$(NC)"
 	@rm -rf $(OBJDIR)
 
-fclean: clean libft
+fclean: clean
 	@printf "$(MAGENTA)Removing binary: $(BOLD)%s\n$(NC)" $(NAME)
 	@rm -f $(NAME) $(NAME_TEST)
 
-re: fclean all libft
-
-fclean-nolibft:
-	@printf "$(MAGENTA)Cleaning objects.\n$(NC)"
-	@rm -rf $(OBJDIR)
-	@printf "$(MAGENTA)Removing binary: $(BOLD)%s\n$(NC)" $(NAME)
-	@rm -f $(NAME) $(NAME_TEST)
-r: fclean-nolibft all
-
-#  ============================= COMPILE TESTS ==============================  #
-
-NAME_TEST = UnitTests
-
-GTEST_INCLUDE = googletest/googletest/include #/usr/local/opt/googletest/include
-GTEST_LIB = googletest/build/lib #-L/usr/local/opt/googletest/lib
-
-CXXFLAGS_TEST = -std=c++17 -I$(GTEST_INCLUDE)
-LXXFLAGS_TEST = -std=c++17 -pthread -L$(GTEST_LIB) -lgtest -lgtest_main
-
-SRCDIR_TEST = tests
-OBJDIR_TEST = $(OBJDIR)/$(SRCDIR_TEST)
-SRC_TEST    = $(wildcard $(SRCDIR_TEST)/*.cc)
-OBJ_TEST    = $(patsubst $(SRCDIR_TEST)/%.cc, $(OBJDIR_TEST)/%.o, $(SRC_TEST))
-
-compile-test: $(NAME) googletest $(NAME_TEST)
-
-$(NAME_TEST): $(OBJDIR_TEST) $(OBJ_TEST)
-	@$(CXX) $(OBJS) $(OBJ_TEST) $(LDFLAGS) $(LXXFLAGS_TEST) -o $(NAME_TEST)
-	@printf "🧪 $(BOLD)$(CYAN)%s$(NC)$(CYAN) has been successfully linked.\n$(NC)" $@
-
-$(OBJDIR_TEST):
-	@mkdir -p $(OBJDIR_TEST)
-
-$(OBJDIR_TEST)/%.o: $(SRCDIR_TEST)/%.cc
-	@printf "$(GRAY)Compiling: %s\n$(NC)" $<
-	@$(CC) $(CPPFLAGS) $(CFLAGS) $(CXXFLAGS_TEST) -c $< -o $@
-
-googletest: googletest/build
-googletest/build:
-	cmake -S googletest -B googletest/build
-	cmake --build googletest/build
-	#
-#  =============================== RUN TESTS ================================  #
-
-RUN_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
-RUN_ARGS := $(if $(RUN_ARGS),$(RUN_ARGS),*)
-test: compile-test
-	#./$(NAME_TEST) --gtest_color=yes --gtest_filter="$(RUN_ARGS)" # --gtest_brief=1 to run quietly
+re: fclean all
 
 #  ================================= .PHONY =================================  #
 
-.PHONY: all link clean fclean re libft test googletest
+.PHONY: all link clean fclean re
 
 #  ================================= COLORS =================================  #
 
