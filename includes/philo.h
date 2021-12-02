@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 15:12:01 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/02 14:49:42 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/02 15:16:30 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ void	philo_take_forks(t_philo *philo);
 void	philo_pick_a_fork(t_philo *philo);
 void	philo_replace_forks(t_philo *philo);
 bool	philo_should_stop(t_philo *philo);
+void	philo_ms_sleep(t_philo *philo, uint ms_start, uint ms_duration);
 
 // Printing actions
 void	put_action(uint timestamp, int id, t_action action);

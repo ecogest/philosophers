@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:22 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/02 14:47:07 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/02 15:16:10 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,6 @@ void	philo_finished_eating(t_philo *philo)
 	philo->meal_count++;
 	if (philo->meal_count == philo->param->max_meal)
 		philo_update_status(philo, sated);
-}
-
-void	philo_ms_sleep(t_philo *philo, uint ms_start, uint ms_duration)
-{
-	static const uint	mus_refresh_interval = 500;
-
-	while (!philo_should_stop(philo) && \
-			1000 * f_timestamp_get() + mus_refresh_interval \
-			< 1000 * (ms_start + ms_duration))
-		usleep(mus_refresh_interval);
 }
 
 /*
