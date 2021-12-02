@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 14:34:14 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/02 12:41:05 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/02 15:39:42 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,12 @@ void	*monitor_mealtime(void *phil)
 	philo = phil;
 	while (!status_should_stop(philo->philos_state))
 	{
-		usleep(100);
 		last_mealtime = monitor_get_lastmealtime(philo);
 		curr_time = f_timestamp_get();
 		if (curr_time - last_mealtime > (uint)philo->param->tt_die)
 			monitor_trigger_death(philo, curr_time);
+		else
+			usleep(curr_time - last_mealtime / 2);
 	}
 	return (NULL);
 }
